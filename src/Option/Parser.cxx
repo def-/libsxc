@@ -49,8 +49,10 @@ namespace libsxc
                 _options.begin();
                 availOption != _options.end();
                 ++availOption) {
-                    if ((*availOption)->getShortName() ==
-                    option->getShortName())
+                    // Allow multiple options without a short name.
+                    if (option->getShortName() != ' '
+                    && (*availOption)->getShortName()
+                    == option->getShortName())
                         throw Exception::OptionException(
                             Exception::OptionsConflicting,
                             "-" + option->getShortName());
