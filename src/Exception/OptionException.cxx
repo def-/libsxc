@@ -46,8 +46,7 @@ namespace libsxc
         {
             switch (_type) {
                 case ShowUsage:
-                    _description =
-                    std::string(PACKAGE) + " " + VERSION + " (C) " + COPYRIGHT;
+                    _description = "";
                     break;
                 case OptionNotSet:
                     _description =

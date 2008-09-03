@@ -37,7 +37,6 @@ namespace libsxc
         : _type(type), _message(message), _isDescriptionCreated(false)
         {
         }/*}}}*/
-
         Exception::Exception(Type type, const char *message) throw()/*{{{*/
         : _type(type), _isDescriptionCreated(false)
         {
@@ -47,12 +46,15 @@ namespace libsxc
         Exception::~Exception() throw()/*{{{*/
         {
         }/*}}}*/
+        const char *Exception::what() const throw()/*{{{*/
+        {
+            return getMessage().c_str();
+        }/*}}}*/
 
         const std::string &Exception::getMessage() const throw()/*{{{*/
         {
             return _message;
         }/*}}}*/
-
         const std::string &Exception::getDescription() throw()/*{{{*/
         {
             if (!_isDescriptionCreated) {
@@ -61,20 +63,14 @@ namespace libsxc
             }
             return _description;
         }/*}}}*/
-
-        void Exception::setInvalid() throw()/*{{{*/
-        {
-            _description = "Invalid exception type.";
-        }/*}}}*/
-
         Type Exception::getType() const throw()/*{{{*/
         {
             return _type;
         }/*}}}*/
 
-        const char *Exception::what() const throw()/*{{{*/
+        void Exception::setInvalid() throw()/*{{{*/
         {
-            return getMessage().c_str();
+            _description = "Invalid exception type.";
         }/*}}}*/
     }
 }

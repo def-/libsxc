@@ -58,12 +58,10 @@ namespace libsxc
         {
             return _shortName;
         }/*}}}*/
-
         std::string OptionBase::getLongName()/*{{{*/
         {
             return _longName;
         }/*}}}*/
-
         std::string OptionBase::getName()/*{{{*/
         {
             if ("" != _longName)
@@ -72,27 +70,22 @@ namespace libsxc
                 return "-" + _shortName;
             return _variable;
         }/*}}}*/
-
         std::string OptionBase::getVariable()/*{{{*/
         {
             return _variable;
         }/*}}}*/
-
         std::string OptionBase::getDescription()/*{{{*/
         {
             return _description;
         }/*}}}*/
-
         bool OptionBase::getRequiresArgument()/*{{{*/
         {
             return _requiresArgument;
         }/*}}}*/
-
         bool OptionBase::getIsObligatory()/*{{{*/
         {
             return _isObligatory;
         }/*}}}*/
-
         bool OptionBase::getIsSet()/*{{{*/
         {
             return _isSet;

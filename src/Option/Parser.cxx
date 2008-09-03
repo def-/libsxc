@@ -65,7 +65,6 @@ namespace libsxc
                 _options.push_back(option);
             }
         }/*}}}*/
-
         void Parser::parse(char *argv[])/*{{{*/
         {
             _programName = argv[0];
@@ -156,7 +155,6 @@ namespace libsxc
                     Exception::OptionUnknown,
                     arguments.at(0));
         }/*}}}*/
-
         std::vector<std::string> Parser::getUsage()/*{{{*/
         {
             std::vector<std::string> out;
@@ -205,7 +203,6 @@ namespace libsxc
 
             return text;
         }/*}}}*/
-
         std::string Parser::getUsageLine(OptionBase option)/*{{{*/
         {
             std::string line;
