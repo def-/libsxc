@@ -87,8 +87,12 @@ namespace libsxc
                 std::vector<std::string>::iterator argument = arguments.begin();
                 argument != arguments.end();) {
                     if ("--help" == *argument || "-h" == *argument) {
-                        throw Exception::OptionException(Exception::ShowUsage);
-                    } if ("--" + (*option)->getLongName() == *argument
+                        throw Exception::OptionException(
+                            Exception::ShowUsage);
+                    } else if ("--version" == *argument || "-v" == *argument) {
+                        throw Exception::OptionException(
+                            Exception::ShowVersion);
+                    } else if ("--" + (*option)->getLongName() == *argument
                     || std::string("-")
                     + (*option)->getShortName() == *argument) {
                         if ((*option)->getRequiresArgument()) {
