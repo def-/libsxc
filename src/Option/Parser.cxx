@@ -219,8 +219,11 @@ namespace libsxc
             if (option.getLongName() != "")
                 line += std::string("--") + option.getLongName();
             if (option.getLongName() != "" || option.getShortName() != ' ')
-                line += std::string(" ");
-            line += option.getVariable() + ": " + option.getDescription();
+                if (option.getRequiresArgument())
+                    line += std::string(" ");
+            if (option.getRequiresArgument())
+                line += option.getVariable();
+            line += ": " + option.getDescription();
 
             return line;
         }/*}}}*/
