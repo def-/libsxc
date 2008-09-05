@@ -23,6 +23,7 @@
 // INCLUDE/*{{{*/
 
 #include <string>
+#include <stdexcept>
 
 #include <libsxc/Option/OptionBase.hxx>
 
@@ -51,7 +52,9 @@ namespace libsxc
 
         void OptionBase::setValue(std::string rawValue)/*{{{*/
         {
-            // Doing nothing, as this method should never be called.
+            throw std::logic_error(
+                "OptionBase::setValue() was called instead of the Option's "
+                "implementation of the method.");
         }/*}}}*/
 
         char OptionBase::getShortName()/*{{{*/
