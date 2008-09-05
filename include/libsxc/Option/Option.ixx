@@ -30,6 +30,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <stdexcept>
 
 #include <gloox/jid.h>
 
@@ -45,6 +46,39 @@ namespace libsxc
             Parser *parser,
             char shortName,
             std::string longName,
+            std::string description)
+        : OptionBase(
+            shortName,
+            longName,
+            "",
+            description,
+            false,
+            false)
+        {
+            throw std::logic_error(
+                "Option \"" + longName + "\" uses constructor, that is only " +
+                "for boolean options.");
+        }/*}}}*/
+        template <> inline Option<bool>::Option(/*{{{*/
+            Parser *parser,
+            char shortName,
+            std::string longName,
+            std::string description)
+        : OptionBase( // To use getName().
+            shortName,
+            longName,
+            "",
+            description,
+            false, // No boolean requires an argument.
+            false),
+            _value(false) // Default to false.
+        {
+            parser->addOption(this);
+        }/*}}}*/
+        template <typename T> Option<T>::Option(/*{{{*/
+            Parser *parser,
+            char shortName,
+            std::string longName,
             std::string variable,
             std::string description,
             T defaultValue)
@@ -54,10 +88,30 @@ namespace libsxc
             variable,
             description,
             true, // All non-booleans require an argument.
-            false), // Has an default value, so it must not be set.
+            false), // Has an default value, so it doesn't have to be set.
             _value(defaultValue)
         {
             parser->addOption(this);
+        }/*}}}*/
+        template <> Option<bool>::Option(/*{{{*/
+            Parser *parser,
+            char shortName,
+            std::string longName,
+            std::string variable,
+            std::string description,
+            bool defaultValue)
+        : OptionBase(
+            shortName,
+            longName,
+            variable,
+            description,
+            true,
+            false),
+            _value(defaultValue)
+        {
+            throw std::logic_error(
+                "Option \"" + longName + "\" uses constructor, that is only " +
+                "for non-boolean options.");
         }/*}}}*/
         template <typename T> Option<T>::Option(/*{{{*/
             Parser *parser,
@@ -75,22 +129,23 @@ namespace libsxc
         {
             parser->addOption(this);
         }/*}}}*/
-        template <> inline Option<bool>::Option(/*{{{*/
+        template <> Option<bool>::Option(/*{{{*/
             Parser *parser,
             char shortName,
             std::string longName,
             std::string variable,
             std::string description)
-        : OptionBase( // To use getName().
+        : OptionBase(
             shortName,
             longName,
             variable,
             description,
-            false,
-            false),
-            _value(false) // Default to false.
+            true,
+            true)
         {
-            parser->addOption(this);
+            throw std::logic_error(
+                "Option \"" + longName + "\" uses constructor, that is only " +
+                "for non-boolean options.");
         }/*}}}*/
 
         template <typename T> void Option<T>::setValue(/*{{{*/

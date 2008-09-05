@@ -41,10 +41,10 @@ namespace libsxc
         _parser = new Option::Parser;
 
         _bool = new Option::Option<bool>(
-            _parser, 'a', "bool", "abc", "description");
+            _parser, 'a', "bool", "description");
 
         _bool2 = new Option::Option<bool>(
-            _parser, 'g', "bool2", "abc", "description", true);
+            _parser, 'g', "bool2", "description");
 
         _int = new Option::Option<int>(
             _parser, 'b', "int", "def", "description", 42);
@@ -95,7 +95,7 @@ namespace libsxc
         }
 
         CPPUNIT_ASSERT(_bool->getValue());
-        CPPUNIT_ASSERT(_bool2->getValue());
+        CPPUNIT_ASSERT(!_bool2->getValue());
         CPPUNIT_ASSERT_EQUAL(42, _int->getValue());
         CPPUNIT_ASSERT_DOUBLES_EQUAL(1.2345, _float->getValue(), 0.00001);
         CPPUNIT_ASSERT_EQUAL('c', _char->getValue());

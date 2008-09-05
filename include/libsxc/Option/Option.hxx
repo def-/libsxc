@@ -55,26 +55,20 @@ namespace libsxc
                  *
                  * Construct a new option object and add it to the parser.
                  *
-                 * @warning This constructor takes the default value and whether
-                 *          the option is optional. This only makes sense when
-                 *          using boolean as type.
+                 * @warning This constructor takes no default value and no
+                 *          "default"-flag. This only makes sense when using
+                 *          boolean as type.
                  *
                  * @param parser The parser the object will be added to.
                  * @param shortName A short option name. ('x' for "-x")
                  * @param longName A long option name. ("foo" for --foo)
-                 * @param variable How to call the variable in the usage output.
                  * @param description A description of the option.
-                 * @param defaultValue The value to be set if not specified.
-                 * @param isObligatory Whether the option has to be set.
                  */
                 Option(
                     Parser *parser,
                     char shortName,
                     std::string longName,
-                    std::string variable,
-                    std::string description,
-                    T defaultValue,
-                    bool isObligatory);
+                    std::string description);
 
     /*}}}*/
                 //Option(parser, short, long, var, description, default);/*{{{*/
@@ -85,7 +79,8 @@ namespace libsxc
                  * Construct a new option object and add it to the parser.
                  *
                  * @note This constructor takes a default value, so the option
-                 *       is optional.
+                 *       is optional. This makes no sense for booleans, as they
+                 *       always default to "false" and are optional.
                  *
                  * @param parser The parser the object will be added to.
                  * @param shortName A short option name. ('x' for "-x")
@@ -111,7 +106,8 @@ namespace libsxc
                  * Construct a new option object and add it to the parser.
                  *
                  * @note This constructor takes no default value, so it is
-                 *       obligatory.
+                 *       obligatory. This makes no sense for booleans, as they
+                 *       always are optional, else you couldn't not set them...
                  *
                  * @param parser The parser the object will be added to.
                  * @param shortName A short option name. ('x' for "-x")
