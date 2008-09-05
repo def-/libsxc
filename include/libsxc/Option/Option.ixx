@@ -34,7 +34,13 @@
 
 #include <gloox/jid.h>
 
+#include <print.hxx>
+
 #include <libsxc/Exception/OptionException.hxx>
+
+#ifdef HAVE_CONFIG_H
+#   include <config.hxx>
+#endif
 
 /*}}}*/
 
@@ -154,6 +160,12 @@ namespace libsxc
             if (_isSet) // Only allow to be set one time.
                 throw Exception::OptionException(
                     Exception::OptionSetMultiple, getName());
+
+#ifdef      DEBUG
+                printLog(
+                    "Set value: (option: \"" + getName() + "\", value: \"" +
+                    rawValue + "\").");
+#endif
 
             doSetValue(rawValue);
 
