@@ -32,24 +32,26 @@
 
 /*}}}*/
 
-//const std::string _outputPrefix;/*{{{*/
-
-/// The text printed before every output using @ref printErr() and @ref
-/// printLog().
-const std::string _outputPrefix = PACKAGE ": ";
-
-
-/*}}}*/
-
-void printErr(std::string text)/*{{{*/
+namespace libsxc
 {
-    std::cerr << _outputPrefix << text << std::endl;
-}/*}}}*/
+    //const std::string _outputPrefixLib;/*{{{*/
 
-void printLog(std::string text)/*{{{*/
-{
-    std::clog << _outputPrefix << text << std::endl;
-}/*}}}*/
+    /// The text printed before every output using @ref printErr() and @ref
+    /// printLog().
+    const std::string _outputPrefixLib = PACKAGE ": ";
+
+
+    /*}}}*/
+
+    void printErr(std::string text)/*{{{*/
+    {
+        std::cerr << _outputPrefixLib << text << std::endl;
+    }/*}}}*/
+    void printLog(std::string text)/*{{{*/
+    {
+        std::clog << _outputPrefixLib << text << std::endl;
+    }/*}}}*/
+}
 
 // Use no tabs at all; four spaces indentation; max. eighty chars per line.
 // vim: et ts=4 sw=4 tw=80 fo+=c fdm=marker

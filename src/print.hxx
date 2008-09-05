@@ -35,36 +35,39 @@
  * @author Dennis Felsing
  */
 
-//void printErr(std::string text);/*{{{*/
+namespace libsxc
+{
+    //void printErr(std::string text);/*{{{*/
 
-/**
- * @brief Print a text to stderr.
- *
- * Format a raw text and print it to stderr.
- *
- * @note As sxc normally communicates using its own files, this
- *       method should only be used on critical errors, for example
- *       when you can't write to the output file or before the
- *       output file has been initialized.
- *
- * @param text The raw text to print.
- */
-void printErr(std::string text);
+    /**
+     * @brief Print a text to stderr.
+     *
+     * Format a raw text and print it to stderr.
+     *
+     * @note As sxc normally communicates using its own files, this
+     *       method should only be used on critical errors, for example
+     *       when you can't write to the output file or before the
+     *       output file has been initialized.
+     *
+     * @param text The raw text to print.
+     */
+    void printErr(std::string text);
 
-/*}}}*/
-//void printLog(std::string text);/*{{{*/
+    /*}}}*/
+    //void printLog(std::string text);/*{{{*/
 
-/**
- * @brief Print a logging text.
- *
- * Format a raw text and print it using clog. This usually goes to
- * stderr.
- *
- * @param text The raw text to print.
- */
-void printLog(std::string text);
+    /**
+     * @brief Print a logging text.
+     *
+     * Format a raw text and print it using clog. This usually goes to
+     * stderr.
+     *
+     * @param text The raw text to print.
+     */
+    void printLog(std::string text);
 
-/*}}}*/
+    /*}}}*/
+}
 
 
 #endif // PRINT_HXX
