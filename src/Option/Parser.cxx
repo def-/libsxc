@@ -116,7 +116,7 @@ namespace libsxc
                     if ("--help" == *argument || "-h" == *argument) {
                         throw Exception::OptionException(
                             Exception::ShowUsage);
-                    } else if ("--version" == *argument || "-v" == *argument) {
+                    } else if ("--version" == *argument || "-V" == *argument) {
                         throw Exception::OptionException(
                             Exception::ShowVersion);
                     } else if ("--" + (*option)->getLongName() == *argument
