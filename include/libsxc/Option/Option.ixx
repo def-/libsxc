@@ -99,7 +99,7 @@ namespace libsxc
         {
             parser->addOption(this);
         }/*}}}*/
-        template <> Option<bool>::Option(/*{{{*/
+        template <> inline Option<bool>::Option(/*{{{*/
             Parser *parser,
             char shortName,
             std::string longName,
@@ -135,7 +135,7 @@ namespace libsxc
         {
             parser->addOption(this);
         }/*}}}*/
-        template <> Option<bool>::Option(/*{{{*/
+        template <> inline Option<bool>::Option(/*{{{*/
             Parser *parser,
             char shortName,
             std::string longName,
