@@ -1,5 +1,8 @@
 SUBDIRS = Exception Option
 
+installdir = $(includedir)/$(PACKAGE)
+install_HEADERS = generateString.hxx
+
 # Only remove our own directory. No weird stuff like removing every empty
 # dir.
 uninstall-hook:
