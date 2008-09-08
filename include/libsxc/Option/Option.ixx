@@ -190,6 +190,11 @@ namespace libsxc
             _isSet = true;
             _value = !_value; // Complement the value.
         }/*}}}*/
+        template <> inline void Option<std::string>::doSetValue(/*{{{*/
+            std::string rawValue)
+        {
+            _value = rawValue;
+        }/*}}}*/
         template <> inline void Option<char>::doSetValue(/*{{{*/
             std::string rawValue)
         {

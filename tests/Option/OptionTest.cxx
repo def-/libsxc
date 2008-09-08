@@ -104,6 +104,19 @@ namespace libsxc
         CPPUNIT_ASSERT_EQUAL(123, _default->getValue());
         CPPUNIT_ASSERT_EQUAL(std::string("bar"), _default2->getValue());
     }/*}}}*/
+    void OptionTest::testStringParsing()/*{{{*/
+    {
+        const char *argv[] = {
+            "sxc-test", "123", "bar", "--long", "1", "--float", "0", "--string", "abc def ghi jklsak", NULL};
+
+        try {
+            _parser->parse(const_cast<char **>(argv));
+        } catch (Exception::OptionException &e) {
+            CPPUNIT_FAIL(e.getDescription());
+        }
+
+        CPPUNIT_ASSERT_EQUAL(std::string("abc def ghi jklsak"), _string->getValue());
+    }/*}}}*/
     void OptionTest::testMissingObligatoryOption()/*{{{*/
     {
         const char *argv[] = {

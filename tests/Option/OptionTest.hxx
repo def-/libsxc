@@ -44,6 +44,7 @@ namespace libsxc
     {
         CPPUNIT_TEST_SUITE(OptionTest);
             CPPUNIT_TEST(testCorrectParsing);
+            CPPUNIT_TEST(testStringParsing);
             CPPUNIT_TEST(testMissingObligatoryOption);
             CPPUNIT_TEST(testValueNotSet);
             CPPUNIT_TEST(testOptionSetMultipleTimes);
@@ -60,6 +61,7 @@ namespace libsxc
             void tearDown();
 
             void testCorrectParsing();
+            void testStringParsing();
             void testMissingObligatoryOption();
             void testValueNotSet();
             void testOptionSetMultipleTimes();
