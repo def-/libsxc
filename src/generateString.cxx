@@ -33,14 +33,14 @@
 
 namespace libsxc
 {
-    std::string &genConnErrorString(/*{{{*/
+    std::string genConnErrorString(/*{{{*/
         gloox::ConnectionError connectionError,
         gloox::StreamError streamError,
         const std::string &streamErrorText,
         gloox::AuthenticationError authError,
         bool isDebug)
     {
-        static std::string text;
+        std::string text;
 
         switch (connectionError) {
         case gloox::ConnNoError:
@@ -282,9 +282,9 @@ namespace libsxc
         }
         return text;
     }/*}}}*/
-    std::string &genPresenceString(gloox::Presence::PresenceType presence)/*{{{*/
+    std::string genPresenceString(gloox::Presence::PresenceType presence)/*{{{*/
     {
-        static std::string presenceStr;
+        std::string presenceStr;
         switch (presence) {
         case gloox::Presence::Available:
             presenceStr = "Available";
@@ -318,10 +318,10 @@ namespace libsxc
         }
         return presenceStr;
     }/*}}}*/
-    std::string &genStanzaErrorString(/*{{{*/
+    std::string genStanzaErrorString(/*{{{*/
         gloox::StanzaError error)
     {
-        static std::string str;
+        std::string str;
 
         switch (error) {
         case gloox::StanzaErrorBadRequest:
@@ -438,9 +438,9 @@ namespace libsxc
 
         return str;
     }/*}}}*/
-    std::string &genMsgTypeString(gloox::Message::MessageType type)/*{{{*/
+    std::string genMsgTypeString(gloox::Message::MessageType type)/*{{{*/
     {
-        static std::string str;
+        std::string str;
         switch (type) {
         case gloox::Message::Chat:
             str = "Chat";

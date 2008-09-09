@@ -35,7 +35,7 @@
 
 namespace libsxc
 {
-    //string &genConnErrorString(connE, streamE, streamEText, authE, debug=0);/*{{{*/
+    //string genConnErrorString(connE, streamE, streamEText, authE, debug=0);/*{{{*/
 
     /**
      * @brief Generate a connection error text.
@@ -47,7 +47,7 @@ namespace libsxc
      * @param authError More verbose information about an authentication error.
      * @return The generated text.
      */
-    std::string &genConnErrorString(
+    std::string genConnErrorString(
         gloox::ConnectionError connectionError,
         gloox::StreamError streamError,
         const std::string &streamErrorText,
@@ -55,7 +55,7 @@ namespace libsxc
         bool isDebug = false);
 
     /*}}}*/
-    //std::string &genPresenceString(gloox::Presence::PresenceType presence);/*{{{*/
+    //std::string genPresenceString(gloox::Presence::PresenceType presence);/*{{{*/
 
     /**
      * @brief Generate a presence text.
@@ -63,10 +63,10 @@ namespace libsxc
      * @param presence The presence.
      * @return The generated text.
      */
-    std::string &genPresenceString(gloox::Presence::PresenceType presence);
+    std::string genPresenceString(gloox::Presence::PresenceType presence);
 
     /*}}}*/
-    //std::string &genStanzaErrorString(gloox::StanzaError error)/*{{{*/
+    //std::string genStanzaErrorString(gloox::StanzaError error)/*{{{*/
 
     /**
      * @brief Generate a stanza error text.
@@ -74,11 +74,11 @@ namespace libsxc
      * @param error The stanza error.
      * @return The generated text.
      */
-    std::string &genStanzaErrorString(
+    std::string genStanzaErrorString(
         gloox::StanzaError error);
 
     /*}}}*/
-    //std::string &genMsgTypeString(gloox::Message::MessageType type);/*{{{*/
+    //std::string genMsgTypeString(gloox::Message::MessageType type);/*{{{*/
 
     /**
      * @brief Generate a text from a message type.
@@ -86,7 +86,7 @@ namespace libsxc
      * @param type The message type.
      * @return The generated text.
      */
-    std::string &genMsgTypeString(gloox::Message::MessageType type);
+    std::string genMsgTypeString(gloox::Message::MessageType type);
 
     /*}}}*/
 }
