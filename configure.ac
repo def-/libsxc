@@ -226,6 +226,9 @@ AC_SUBST(GLOOX_LIBS)
 AC_SUBST(CPPUNIT_CFLAGS)
 AC_SUBST(CPPUNIT_LIBS)
 #}}}
+# Conditionals#{{{
+AM_CONDITIONAL(have_cppunit, test "x${have_cppunit}" = xyes)
+#}}}
 
 #AC_CONFIG_FILES([#{{{
 AC_CONFIG_FILES([
