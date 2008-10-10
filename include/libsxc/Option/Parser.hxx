@@ -38,7 +38,6 @@ namespace libsxc
     namespace Option
     {
         /**
-         * @author Dennis Felsing
          * @brief An option parser
          *
          * This class parses program options.

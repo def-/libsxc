@@ -33,7 +33,6 @@ namespace libsxc
     namespace Exception
     {
         /**
-         * @author Dennis Felsing
          * @brief An enum for all exception types and their exit codes.
          */
         //enum Type/*{{{*/

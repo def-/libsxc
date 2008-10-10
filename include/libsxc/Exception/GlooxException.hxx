@@ -37,7 +37,6 @@ namespace libsxc
     namespace Exception
     {
         /**
-         * @author Dennis Felsing
          * @brief An exception class for gloox errors.
          */
         class GlooxException : public Exception

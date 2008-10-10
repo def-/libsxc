@@ -37,7 +37,6 @@ namespace libsxc
     namespace Exception
     {
         /**
-         * @author Dennis Felsing
          * @brief A class for program argument exceptions.
          */
         class OptionException : public Exception

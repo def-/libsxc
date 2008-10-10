@@ -40,7 +40,6 @@ namespace libsxc
     namespace Option
     {
         /**
-         * @author Dennis Felsing
          * @brief A representation of a program option.
          */
         template <typename T>

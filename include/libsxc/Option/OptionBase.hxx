@@ -35,7 +35,6 @@ namespace libsxc
     namespace Option
     {
         /**
-         * @author Dennis Felsing
          * @brief The base class for options.
          */
         class OptionBase

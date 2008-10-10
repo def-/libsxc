@@ -31,7 +31,6 @@
 
 
 /**
- * @author Dennis Felsing
  */
 
 namespace libsxc

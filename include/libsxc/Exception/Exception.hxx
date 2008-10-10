@@ -42,7 +42,6 @@ namespace libsxc
     namespace Exception
     {
         /**
-         * @author Dennis Felsing
          * @brief An exception base class.
          */
         class Exception : public std::exception
