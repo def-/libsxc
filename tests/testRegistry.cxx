@@ -30,7 +30,7 @@
 
 namespace libsxc
 {
-    CPPUNIT_TEST_SUITE_REGISTRATION(OptionTest);
+  CPPUNIT_TEST_SUITE_REGISTRATION(OptionTest);
 }
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.

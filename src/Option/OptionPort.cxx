@@ -29,34 +29,34 @@
 
 namespace libsxc
 {
-    namespace Option
+  namespace Option
+  {
+    OptionPort::OptionPort(/*{{{*/
+      Parser *parser,
+      char shortName,
+      std::string longName,
+      std::string variable,
+      std::string description)
+    : Option<int>::Option(
+      parser,
+      shortName,
+      longName,
+      variable,
+      description,
+      -1)
     {
-        OptionPort::OptionPort(/*{{{*/
-            Parser *parser,
-            char shortName,
-            std::string longName,
-            std::string variable,
-            std::string description)
-        : Option<int>::Option(
-            parser,
-            shortName,
-            longName,
-            variable,
-            description,
-            -1)
-        {
-        }/*}}}*/
+    }/*}}}*/
 
-        void OptionPort::setValue(std::string rawValue)/*{{{*/
-        {
-            Option<int>::setValue(rawValue);
+    void OptionPort::setValue(std::string rawValue)/*{{{*/
+    {
+      Option<int>::setValue(rawValue);
 
-            if (getValue() < -1 || getValue() > 65535)
-                throw Exception::OptionException(
-                    Exception::PortInvalid,
-                    rawValue);
-        }/*}}}*/
-    }
+      if (getValue() < -1 || getValue() > 65535)
+        throw Exception::OptionException(
+          Exception::PortInvalid,
+          rawValue);
+    }/*}}}*/
+  }
 }
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.

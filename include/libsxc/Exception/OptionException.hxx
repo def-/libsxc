@@ -33,35 +33,35 @@
 
 namespace libsxc
 {
-    namespace Exception
+  namespace Exception
+  {
+    /**
+     * @brief A class for program argument exceptions.
+     */
+    class OptionException : public Exception
     {
+      public:
+        //OptionException(Type type, std::string message="");/*{{{*/
+
         /**
-         * @brief A class for program argument exceptions.
+         * @brief Create a gloox exception object.
+         *
+         * @param type The type of the exception.
+         * @param message A text describing the exception more verbose.
          */
-        class OptionException : public Exception
-        {
-            public:
-                //OptionException(Type type, std::string message="");/*{{{*/
+        OptionException(Type type, std::string message="");
 
-                /**
-                 * @brief Create a gloox exception object.
-                 *
-                 * @param type The type of the exception.
-                 * @param message A text describing the exception more verbose.
-                 */
-                OptionException(Type type, std::string message="");
+  /*}}}*/
+        //void createDescription() throw();/*{{{*/
 
-    /*}}}*/
-                //void createDescription() throw();/*{{{*/
+        /**
+         * @brief Create the description text.
+         */
+        void createDescription() throw();
 
-                /**
-                 * @brief Create the description text.
-                 */
-                void createDescription() throw();
-
-    /*}}}*/
-        };
-    }
+  /*}}}*/
+    };
+  }
 }
 
 #endif // EXCEPTION_GLOOXEXCEPTION_HXX

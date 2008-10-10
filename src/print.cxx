@@ -25,30 +25,30 @@
 #include <iostream>
 
 #ifdef HAVE_CONFIG_H
-#   include <config.hxx>
+# include <config.hxx>
 #endif
 
 /*}}}*/
 
 namespace libsxc
 {
-    //const std::string _outputPrefixLib;/*{{{*/
+  //const std::string _outputPrefixLib;/*{{{*/
 
-    /// The text printed before every output using @ref printErr() and @ref
-    /// printLog().
-    const std::string _outputPrefixLib = PACKAGE ": ";
+  /// The text printed before every output using @ref printErr() and @ref
+  /// printLog().
+  const std::string _outputPrefixLib = PACKAGE ": ";
 
 
-    /*}}}*/
+  /*}}}*/
 
-    void printErr(std::string text)/*{{{*/
-    {
-        std::cerr << _outputPrefixLib << text << std::endl;
-    }/*}}}*/
-    void printLog(std::string text)/*{{{*/
-    {
-        std::clog << _outputPrefixLib << text << std::endl;
-    }/*}}}*/
+  void printErr(std::string text)/*{{{*/
+  {
+    std::cerr << _outputPrefixLib << text << std::endl;
+  }/*}}}*/
+  void printLog(std::string text)/*{{{*/
+  {
+    std::clog << _outputPrefixLib << text << std::endl;
+  }/*}}}*/
 }
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
