@@ -18,7 +18,6 @@
  */
 /*}}}*/
 
-/* $Id$ */
 
 
 #ifndef OPTION_PARSER_HXX

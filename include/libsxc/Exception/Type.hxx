@@ -18,7 +18,6 @@
  */
 /*}}}*/
 
-/* $Id$ */
 
 
 #ifndef EXCEPTION_TYPE_HXX

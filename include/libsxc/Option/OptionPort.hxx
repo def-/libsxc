@@ -18,7 +18,6 @@
  */
 /*}}}*/
 
-/* $Id$ */
 
 
 #ifndef OPTION_OPTIONPORT_HXX

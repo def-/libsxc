@@ -18,7 +18,6 @@
  */
 /*}}}*/
 
-/* $Id$ */
 
 
 #ifndef OPTION_OPTION_HXX

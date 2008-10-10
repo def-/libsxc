@@ -18,7 +18,6 @@
  */
 /*}}}*/
 
-/* $Id$ */
 
 
 #ifndef EXCEPTION_GLOOXEXCEPTION_HXX

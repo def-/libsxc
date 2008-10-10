@@ -18,7 +18,6 @@
  */
 /*}}}*/
 
-/* $Id$ */
 
 
 #ifndef EXCEPTION_OPTIONEXCEPTION_HXX
