@@ -23,12 +23,13 @@
 #include <unistd.h>
 #include <iostream>
 
-#include <libsxc/print.hxx>
 #include <libsxc/getHostName.hxx>
 
 #ifdef HAVE_CONFIG_H
 # include <config.hxx>
 #endif
+
+#include <libsxc/Logger.hxx>
 
 /*}}}*/
 
@@ -39,7 +40,7 @@ namespace libsxc
     const unsigned int hostNameSize = 256;
     char hostName[hostNameSize];
     if (0 != gethostname(hostName, hostNameSize)) // This should never happen!
-      printErr("Error getting the hostname of this system.");
+      LOG<Error>("Error getting the hostname of this system.");
     return hostName;
   }/*}}}*/
 }

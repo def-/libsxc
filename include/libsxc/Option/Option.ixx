@@ -32,13 +32,13 @@
 
 #include <gloox/jid.h>
 
-#include <print.hxx>
-
 #include <libsxc/Exception/OptionException.hxx>
 
 #ifdef HAVE_CONFIG_H
 # include <config.hxx>
 #endif
+
+#include <libsxc/Logger.hxx>
 
 /*}}}*/
 
@@ -159,11 +159,9 @@ namespace libsxc
         throw Exception::OptionException(
           Exception::OptionSetMultiple, getName());
 
-#ifdef      DEBUG
-        printLog(
-          "Set value: (option: \"" + getName() + "\", value: \"" +
-          rawValue + "\").");
-#endif
+      LOG<Debug>(
+        "Set value: (option: \"" + getName() + "\", value: \"" +
+        rawValue + "\").");
 
       doSetValue(rawValue);
 

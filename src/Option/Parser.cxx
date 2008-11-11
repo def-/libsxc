@@ -20,10 +20,9 @@
 
 // INCLUDE/*{{{*/
 
+#include <sstream>
 #include <string>
 #include <vector>
-
-#include <print.hxx>
 
 #include <libsxc/Option/Parser.hxx>
 #include <libsxc/Exception/OptionException.hxx>
@@ -32,9 +31,7 @@
 # include <config.hxx>
 #endif
 
-#ifdef DEBUG
-# include <sstream>
-#endif
+#include <libsxc/Logger.hxx>
 
 /*}}}*/
 
@@ -44,17 +41,16 @@ namespace libsxc
   {
     void Parser::addOption(OptionBase *option)/*{{{*/
     {
-#     ifdef DEBUG
-        std::ostringstream ss;
-        ss << "Add Option: "
-           << "(short: \"" << option->getShortName()
-           << "\", long: \"" << option->getLongName()
-           << "\", var: \"" << option->getVariable()
-           << "\", desc: \"" << option->getDescription()
-           << "\", req: \"" << option->getRequiresArgument()
-           << "\", oblig: \"" << option->getIsObligatory() << "\")";
-        printLog(ss.str());
-#     endif
+      std::ostringstream ss;
+      ss << "Add Option: "
+         << "(short: \"" << option->getShortName()
+         << "\", long: \"" << option->getLongName()
+         << "\", var: \"" << option->getVariable()
+         << "\", desc: \"" << option->getDescription()
+         << "\", req: \"" << option->getRequiresArgument()
+         << "\", oblig: \"" << option->getIsObligatory() << "\")";
+      LOG<Debug>(ss.str());
+
       // The options having a name have to be parsed first. After
       // that all the nameless options can be passed. Therefore the
       // nameless are appended to an own vector.
@@ -105,12 +101,11 @@ namespace libsxc
         for (
         std::vector<std::string>::iterator argument = arguments.begin();
         argument != arguments.end();) {
-#         ifdef DEBUG
-            printLog(
-              "Parse normal option: (option: \"" +
-              (*option)->getName() + "\", arg: \"" +
-              *argument + "\").");
-#         endif
+          LOG<Debug>(
+            "Parse normal option: (option: \"" +
+            (*option)->getName() + "\", arg: \"" +
+            *argument + "\").");
+
           if ("--help" == *argument || "-h" == *argument) {
             throw Exception::OptionException(
               Exception::ShowUsage);
@@ -165,12 +160,11 @@ namespace libsxc
         for (
         std::vector<std::string>::iterator argument = arguments.begin();
         argument != arguments.end() && !(*option)->getIsSet();) {
-#         ifdef DEBUG
-            printLog(
-              "Parse nameless option: (option: \"" +
-              (*option)->getName() + "\", arg: \"" +
-              *argument + "\").");
-#         endif
+          LOG<Debug>(
+            "Parse nameless option: (option: \"" +
+            (*option)->getName() + "\", arg: \"" +
+            *argument + "\").");
+
           if (argument->at(0) != '-') {
             (*option)->setValue(*argument);
             argument = arguments.erase(argument);
