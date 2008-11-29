@@ -39,6 +39,22 @@ namespace libsxc
 {
   namespace Option
   {
+    void Parser::setHelp(const std::string &text)/*{{{*/
+    {
+      _help = text;
+    }/*}}}*/
+    const std::string &Parser::getHelp()/*{{{*/
+    {
+      return _help;
+    }/*}}}*/
+    void Parser::setVersion(const std::string &text)/*{{{*/
+    {
+      _version = text;
+    }/*}}}*/
+    const std::string &Parser::getVersion()/*{{{*/
+    {
+      return _version;
+    }/*}}}*/
     void Parser::addOption(OptionBase *option)/*{{{*/
     {
       std::ostringstream ss;

@@ -44,6 +44,19 @@ namespace libsxc
     class Parser
     {
       public:
+        //void setHelp(const std::string &text);/*{{{*/
+
+        /**
+         * Set a text to show when a help message is wanted by the user.
+         *
+         * @param text The text to show. Can be multiple lines long.
+         */
+        void setHelp(const std::string &text);
+
+/*}}}*/
+        const std::string &getHelp();
+        void setVersion(const std::string &text);
+        const std::string &getVersion();
         //void addOption(OptionBase *option);/*{{{*/
 
         /**
@@ -110,6 +123,8 @@ namespace libsxc
 
   /*}}}*/
 
+        std::string _help;
+        std::string _version;
         //std::vector<OptionBase *> _options;/*{{{*/
 
         /// The normal options.
