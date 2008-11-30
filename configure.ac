@@ -235,11 +235,13 @@ AC_CONFIG_FILES([
     Makefile
     Doxyfile
     src/Makefile
+    src/Debug/Makefile
     src/Exception/Makefile
     src/Option/Makefile
     src/Signal/Makefile
     include/Makefile
     include/libsxc/Makefile
+    include/libsxc/Debug/Makefile
     include/libsxc/Exception/Makefile
     include/libsxc/Option/Makefile
     include/libsxc/Signal/Makefile
