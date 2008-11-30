@@ -105,7 +105,13 @@ namespace libsxc
       // Send a signal to the current process that will be caught by the
       // running @ref wait thread and result in the thread to exit. Not using
       // _threadId or raise(), as they are thread specific.
-      if (-1 == kill(getpid(), _handlers.begin()->first)) {
+      unsigned int signal;
+      if (_handlers.empty()) {
+        signal = SIGINT;
+      } else {
+        signal = _handlers.begin()->first;
+      }
+      if (-1 == kill(getpid(), signal)) {
         int err = errno;
         return;
       }
