@@ -1,4 +1,4 @@
-SUBDIRS = Debug Exception Option Signal
+SUBDIRS = Debug Error Exception Option Signal
 
 installdir = $(includedir)/$(PACKAGE)
 install_HEADERS = generateString.hxx getHostName.hxx Logger.hxx Logger.ixx
