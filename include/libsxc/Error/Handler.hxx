@@ -17,8 +17,8 @@
  */
 /*}}}*/
 
-#ifndef ERROR_HANDLER_HXX
-#define ERROR_HANDLER_HXX
+#ifndef LIBSXC_ERROR_HANDLER_HXX
+#define LIBSXC_ERROR_HANDLER_HXX
 
 // INCLUDE/*{{{*/
 
@@ -26,7 +26,7 @@
 
 namespace libsxc
 {
-  namespace Error
+  namespace Error2
   {
     /**
      * Error handling interface.
@@ -69,6 +69,6 @@ namespace libsxc
   }
 }
 
-#endif // ERROR_HANDLER_HXX
+#endif // LIBSXC_ERROR_HANDLER_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

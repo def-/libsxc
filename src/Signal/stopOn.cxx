@@ -34,6 +34,11 @@ namespace libsxc
 
     void Stopper::handle(unsigned int signal)/*{{{*/
     {
+      stop();
+    }/*}}}*/
+
+    void Stopper::stop()/*{{{*/
+    {
       _waiter.stop();
     }/*}}}*/
 

@@ -44,6 +44,8 @@ namespace libsxc
         void handle(unsigned int signal);
 
 /*}}}*/
+      protected:
+        void stop();
       private:
         Waiter &_waiter;
     };
