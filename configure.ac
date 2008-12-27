@@ -182,6 +182,19 @@ AC_LANG([C++])
 
 # Checks for header files.
 AC_HEADER_STDC
+AC_CHECK_HEADERS([pthread.h], [have_pthreads=yes], [have_pthreads=no])
+
+# Checks for libraries.
+# pthread#{{{
+AC_SEARCH_LIBS([pthread_create], [pthread], [], [have_pthreads=no])
+if test "x${have_pthreads}" = xno; then
+    echo \
+"-------------------------------------------------
+ Unable to find Pthreads.
+ \"make check\" will not work.
+-------------------------------------------------"
+fi
+#}}}
 # gloox#{{{
 PKG_CHECK_MODULES([GLOOX], [gloox >= 1.0], [have_gloox=yes], [have_gloox=no])
 if test "x${have_gloox}" = xno; then
@@ -229,7 +242,7 @@ AC_SUBST(CPPUNIT_CFLAGS)
 AC_SUBST(CPPUNIT_LIBS)
 #}}}
 # Conditionals#{{{
-AM_CONDITIONAL(have_cppunit, test "x${have_cppunit}" = xyes)
+AM_CONDITIONAL(do_check, test "x${have_cppunit}" = xyes -a "x${have_pthreads}" = xyes)
 #}}}
 
 #AC_CONFIG_FILES([#{{{
@@ -275,6 +288,7 @@ echo \
    htags             : ${with_htags}
   make check:
    cppunit (needed)  : ${have_cppunit}
+   pthreads (needed) : ${have_pthreads}
 
  Now type 'make @<:@<target>@:>@'
  where the optional <target> is:
