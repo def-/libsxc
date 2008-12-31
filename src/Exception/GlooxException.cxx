@@ -1,3 +1,4 @@
+#line 1 "libsxc:Exception/GlooxException.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc

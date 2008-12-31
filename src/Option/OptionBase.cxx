@@ -1,3 +1,4 @@
+#line 1 "libsxc:Option/OptionBase.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc

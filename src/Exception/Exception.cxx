@@ -1,3 +1,4 @@
+#line 1 "libsxc:Exception/Exception.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc

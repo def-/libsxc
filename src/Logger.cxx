@@ -1,3 +1,4 @@
+#line 1 "libsxc:Logger.cxx"
 #include <sstream>
 
 #include <libsxc/Logger.hxx>
