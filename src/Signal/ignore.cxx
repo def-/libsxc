@@ -1,4 +1,4 @@
-#line 1 "libsxc:Signal/ignore.cxx"
+#line 2 "libsxc:Signal/ignore.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc

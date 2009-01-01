@@ -1,4 +1,4 @@
-#line 1 "libsxc:getHostName.cxx"
+#line 2 "libsxc:getHostName.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc

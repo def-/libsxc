@@ -1,4 +1,4 @@
-#line 1 "libsxc:generateString.cxx"
+#line 2 "libsxc:generateString.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc

@@ -1,4 +1,4 @@
-#line 1 "libsxc:libsxc/Debug/Logger.ixx"
+#line 2 "libsxc:libsxc/Debug/Logger.ixx"
 // LICENSE/*{{{*/
 /*
   libsxc

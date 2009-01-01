@@ -1,4 +1,4 @@
-#line 1 "libsxc:libsxc/Logger.ixx"
+#line 2 "libsxc:libsxc/Logger.ixx"
 #include <stdexcept>
 #include <iostream>
 

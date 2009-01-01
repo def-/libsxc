@@ -1,4 +1,4 @@
-#line 1 "libsxc:Option/Parser.cxx"
+#line 2 "libsxc:Option/Parser.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc
