@@ -34,24 +34,24 @@ namespace libsxc
     class Handler
     {
       public:
-        //virtual void listen(const std::string &message) = 0;/*{{{*/
+        //virtual void print(const std::string &message) = 0;/*{{{*/
 
         /**
-         * This method is called to listen to an error message.
+         * This method is called to print an error message.
          *
-         * @ref message The message to listen to.
+         * @ref message The message to print.
          */
-        virtual void listen(const std::string &message) = 0;
+        virtual void print(const std::string &message) = 0;
 
 /*}}}*/
-        //virtual void listenCritical(const std::string &message) = 0;/*{{{*/
+        //virtual void printCritical(const std::string &message) = 0;/*{{{*/
 
         /**
-         * This method listens to the messages of critical errors.
+         * This method prints the messages of critical errors.
          *
-         * @ref message The message to listen to.
+         * @ref message The message to print.
          */
-        virtual void listenCritical(const std::string &message) = 0;
+        virtual void printCritical(const std::string &message) = 0;
 
 /*}}}*/
         //virtual void terminate(int exitCode) = 0;/*{{{*/
