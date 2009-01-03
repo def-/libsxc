@@ -42,8 +42,6 @@ namespace libsxc
       NoError = 0, // No problem occured.
       General = 64,
       // Program option exceptions./*{{{*/
-      ShowUsage = -1,
-      ShowVersion = -2,
       OptionNotSet = 80,
       OptionSetMultiple = 81,
       OptionUnknown = 82,
