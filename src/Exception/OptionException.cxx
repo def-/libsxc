@@ -44,9 +44,6 @@ namespace libsxc
     void OptionException::createDescription() throw()/*{{{*/
     {
       switch (_type) {
-        case ShowUsage:
-          _description = "";
-          break;
         case OptionNotSet:
           _description =
           "Obligatory option " + _message + " not set";
