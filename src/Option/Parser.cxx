@@ -40,22 +40,15 @@ namespace libsxc
 {
   namespace Option
   {
-    void Parser::setHelp(const std::string &text)/*{{{*/
+    bool Parser::doShowHelp()/*{{{*/
     {
-      _help = text;
+      return _showHelp;
     }/*}}}*/
-    const std::string &Parser::getHelp()/*{{{*/
+    bool Parser::doShowVersion()/*{{{*/
     {
-      return _help;
+      return _showVersion;
     }/*}}}*/
-    void Parser::setVersion(const std::string &text)/*{{{*/
-    {
-      _version = text;
-    }/*}}}*/
-    const std::string &Parser::getVersion()/*{{{*/
-    {
-      return _version;
-    }/*}}}*/
+
     void Parser::addOption(OptionBase *option)/*{{{*/
     {
       std::ostringstream ss;
@@ -124,11 +117,11 @@ namespace libsxc
             *argument + "\").");
 
           if ("--help" == *argument || "-h" == *argument) {
-            throw Exception::OptionException(
-              Exception::ShowUsage);
+            _showHelp = true;
+            return;
           } else if ("--version" == *argument || "-V" == *argument) {
-            throw Exception::OptionException(
-              Exception::ShowVersion);
+            _showVersion = true;
+            return;
           } else if ("--" + (*option)->getLongName() == *argument
           || std::string("-")
           + (*option)->getShortName() == *argument) {
