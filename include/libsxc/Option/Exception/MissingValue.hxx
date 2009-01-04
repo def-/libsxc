@@ -17,53 +17,40 @@
  */
 /*}}}*/
 
-
-
-#ifndef EXCEPTION_GLOOXEXCEPTION_HXX
-#define EXCEPTION_GLOOXEXCEPTION_HXX
-
+#ifndef VALUE_EXCEPTION_MISSINGVALUE_HXX
+#define VALUE_EXCEPTION_MISSINGVALUE_HXX
 
 // INCLUDE/*{{{*/
 
-#include <string>
+#include <exception>
 
 #include <libsxc/Exception/Exception.hxx>
+#include <libsxc/Exception/Type.hxx>
 
 /*}}}*/
 
 namespace libsxc
 {
-  namespace Exception
+  namespace Option
   {
-    /**
-     * @brief An exception class for gloox errors.
-     */
-    class GlooxException : public Exception
+    namespace Exception
     {
-      public:
-        //GlooxException(Type type, std::string message);/*{{{*/
-
-        /**
-         * @brief Create a gloox exception object.
-         *
-         * @param type The type of the exception.
-         * @param message A text describing the exception more verbose.
-         */
-        GlooxException(Type type, std::string message);
-
-  /*}}}*/
-        //void createDescription() throw();/*{{{*/
-
-        /**
-         * @brief Create the description text.
-         */
-        void createDescription() throw();
-
-  /*}}}*/
-    };
+      /**
+       * @brief An exception to be thrown when parameters or values are
+       * missing.
+       */
+      class MissingValue : virtual public libsxc::Exception::Exception
+      {
+        public:
+          MissingValue(const char* name) throw();
+          MissingValue(const char* name, const std::exception& cause) throw();
+        private:
+          void _createMessage(const char* name) throw();
+      };
+    }
   }
 }
 
-#endif // EXCEPTION_GLOOXEXCEPTION_HXX
+#endif // VALUE_EXCEPTION_MISSINGVALUE_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

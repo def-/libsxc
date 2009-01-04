@@ -26,14 +26,15 @@
 
 // INCLUDE/*{{{*/
 
+#include <libsxc/Option/Exception/Conflict.hxx>
+#include <libsxc/Option/Exception/InvalidValue.hxx>
+
 #include <vector>
 #include <string>
 #include <sstream>
 #include <stdexcept>
 
 #include <gloox/jid.h>
-
-#include <libsxc/Exception/OptionException.hxx>
 
 #ifdef HAVE_CONFIG_H
 # include <config.hxx>
@@ -157,8 +158,7 @@ namespace libsxc
       std::string rawValue)
     {
       if (_isSet) // Only allow to be set one time.
-        throw Exception::OptionException(
-          Exception::OptionSetMultiple, getName());
+        throw Exception::Conflict(getName().c_str());
 
       LOG<Debug>(
         "Set value: (option: \"" + getName() + "\", value: \"" +
@@ -178,8 +178,7 @@ namespace libsxc
 
       if (instream.bad() // Conversion failed
       || !instream.eof())
-        throw Exception::OptionException(
-          Exception::ValueInvalid, getName());
+        throw Exception::InvalidValue("input", getName().c_str());
     }/*}}}*/
     template <> inline void Option<bool>::doSetValue(/*{{{*/
       std::string rawValue)
@@ -196,8 +195,7 @@ namespace libsxc
       std::string rawValue)
     {
       if (rawValue.length() != 1)
-        throw Exception::OptionException(
-          Exception::ValueInvalid, getName());
+        throw Exception::InvalidValue("input", getName().c_str());
       _value = rawValue.at(0);
     }/*}}}*/
     template <> inline void Option<gloox::JID>::doSetValue(/*{{{*/
@@ -206,9 +204,7 @@ namespace libsxc
       if (!_value.setJID(rawValue)
       || _value.username().empty()
       || _value.server().empty())
-        throw Exception::OptionException(
-          Exception::JidInvalid,
-          _value.full());
+        throw Exception::InvalidValue("JID", _value.full().c_str());
     }/*}}}*/
     template <typename T> T Option<T>::getValue()/*{{{*/
     {

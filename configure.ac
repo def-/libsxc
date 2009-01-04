@@ -254,6 +254,7 @@ AC_CONFIG_FILES([
     src/Error/Makefile
     src/Exception/Makefile
     src/Option/Makefile
+    src/Option/Exception/Makefile
     src/Signal/Makefile
     include/Makefile
     include/libsxc/Makefile
@@ -261,6 +262,7 @@ AC_CONFIG_FILES([
     include/libsxc/Error/Makefile
     include/libsxc/Exception/Makefile
     include/libsxc/Option/Makefile
+    include/libsxc/Option/Exception/Makefile
     include/libsxc/Signal/Makefile
     tests/Makefile
     tests/Option/Makefile

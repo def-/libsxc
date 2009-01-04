@@ -17,165 +17,240 @@
  */
 /*}}}*/
 
-
-
 #ifndef EXCEPTION_EXCEPTION_HXX
 #define EXCEPTION_EXCEPTION_HXX
 
-
 // INCLUDE/*{{{*/
 
-#include <string>
 #include <exception>
 
 #include <libsxc/Exception/Type.hxx>
 
 /*}}}*/
 
-/**
- * @brief Contains everything about Exceptions and their handling.
- */
-
 namespace libsxc
 {
+  /**
+   * @brief Contains everything about Exceptions and their handling.
+   */
   namespace Exception
   {
     /**
-     * @brief An exception base class.
+     * @brief Base class for exceptions.
+     *
+     * Supports a descriptive message, an error code (which can be used as
+     * return code) and automatic generation of a backtrace (if a cause has been
+     * passed). The backtrace can be retrieved by calling what() and thus can be
+     * used from any client which works with references or pointers of
+     * std::exception.
+     *
+     * Optionally, the message and the error type can be retrieved directly by
+     * calling their getter methods.
      */
-    class Exception : public std::exception
+    // TODO: Rename and make interface for
+    // classes that can be backtraceble and can backtrace but do not "waste"
+    // memory in favor of returning always the same fixed string (and type)
+    class Exception : virtual public std::exception
     {
       public:
-        //Exception(Type type, std::string &message) throw();/*{{{*/
+        // static const unsigned int WHAT_BUFFER_SIZE = 512;/*{{{*/
+
+        /**
+         * @brief Length of the cstring which will hold the cause for this
+         * exception (if any) and the message that has been passed.
+         */
+        static const unsigned int WHAT_BUFFER_SIZE = 512;
+
+/*}}}*/
+        // static const unsigned int CAUSE_BUFFER_SIZE = 384;/*{{{*/
+
+        /// Length of the cstring which will hold the cause for this exception.
+        static const unsigned int CAUSE_BUFFER_SIZE = 384;
+
+/*}}}*/
+        // static const unsigned int MESSAGE_BUFFER_SIZE = 128;/*{{{*/
+
+        /// Length of the cstring which will hold the cause for this exception.
+        static const unsigned int MESSAGE_BUFFER_SIZE = 128;
+
+/*}}}*/
+
+        // Exception(const char* message, Type type) throw();/*{{{*/
 
         /**
          * @brief Default constructor.
          *
-         * @see Exception::Exception(Type, char*)
-         * @param message Reference of a string describing the
-         *        exception.
+         * @note The message will be truncated if it is longer than
+         * MESSAGE_BUFFER_SIZE.
+         *
+         * @param message A message describing the exception.
+         * @param type The error type.
          */
-        Exception(Type type, std::string &message) throw();
+        Exception(const char* message, Type type) throw();
 
-  /*}}}*/
-        //Exception(Type type, const char *message) throw();/*{{{*/
+/*}}}*/
+        // Exception(const char*, Type, const std::exception&) throw();/*{{{*/
 
         /**
-         * @brief Overloaded constructor.
+         * @brief Constructor to be called when another exception has already
+         * been caught.
          *
-         * @param type The type of the exception.
-         * @param message Pointer to a C style char string describing
-         *        the exception.
+         * @param message A message describing the exception.
+         * @param type The error type.
+         * @param cause The causer for this exception.
+         * @see Exception::Exception(const char*, Type)
          */
-        Exception(Type type, const char *message) throw();
+        Exception(
+          const char* message, Type type, const std::exception& cause) throw();
 
-  /*}}}*/
-
-        //virtual ~Exception() throw();/*{{{*/
+/*}}}*/
+        // virtual ~Exception() throw()/*{{{*/
 
         /**
-         * @brief The destructor.
-         *
-         * Has to be set so the compiler doesn't bug about the
-         * destructor having a looser throw specifier.
+         * @brief Virtual destructor.
          */
         virtual ~Exception() throw();
 
-  /*}}}*/
-        //virtual const char *what() const throw();/*{{{*/
+/*}}}*/
+        // virtual const char* what() const throw();/*{{{*/
 
         /**
-         * @brief Get a C-style character string of @ref getMessage().
+         * @brief Returns information about this exception.
          *
-         * Has to be implemented as a backward compatibility to
-         * exception.
+         * Returns a backtrace using information of the @a cause object passed
+         * as parameter to the constructor. The original cause will be listed on
+         * top, the message of this exception (as returned by getMessage()) will
+         * be on bottom.
          *
-         * @return A C-style character string describing the exception.
+         * @return Null-terminated cstring.
          */
-        virtual const char *what() const throw();
+        virtual const char* what() const throw();
 
-  /*}}}*/
-
-        //const std::string &getMessage() const throw();/*{{{*/
+/*}}}*/
+        // virtual const char* getMessage() const throw();/*{{{*/
 
         /**
-         * @brief Get a const reference to the message of the exception.
-         *
-         * @return A text describing the exception more verbose.
+         * @brief Returns the message of this exception.
+         * @return C-style character string describing this exception.
          */
-        const std::string &getMessage() const throw();
+        virtual const char* getMessage() const throw();
 
-  /*}}}*/
-        //const std::string &getDescription() const throw();/*{{{*/
-
-        /**
-         * @brief Get a const reference to the description.
-         *
-         * Runs @ref createDescription() if @ref _description is not
-         * set.
-         *
-         * @return A text describing the exception more verbose.
-         */
-        const std::string &getDescription() throw();
-
-  /*}}}*/
-        //Type getType() const throw();/*{{{*/
+/*}}}*/
+        // virtual Type getType() const throw();/*{{{*/
 
         /**
-         * @brief Get the type of the exception.
+         * @brief Returns the type (return code) of the exception.
          * @return The type of the exception.
          */
-        Type getType() const throw();
+        virtual Type getType() const throw();
 
-  /*}}}*/
+/*}}}*/
+        // const char* getCause() const throw();/*{{{*/
+
+        /**
+         * @brief Returns the cause of this exception.
+         *
+         * @note: The cause is the exception which triggered firing of this one.
+         * For a description of this exception, see what().
+         *
+         * @return Null-terminated C-style character string which may be empty.
+         */
+        const char* getCause() const throw();
+
+/*}}}*/
 
       protected:
-        //virtual void createDescription() throw() = 0;/*{{{*/
+        // Exception() throw();/*{{{*/
 
         /**
-         * @brief Create the description string.
+         * @brief Lowlevel constructor.
          *
-         * This function has to be implemented by a child class that is
-         * going to be instantiated.
-         *
-         * @note @ref _isDescriptionCreated is set by getDescription and
-         *       therefore hasn't to be set here too.
+         * @note If you are calling this constructor in a derived class, make
+         * sure to not forget calling @c createBacktrace() @em after you have
+         * set message and type.
          */
-        virtual void createDescription() throw() = 0;
+        Exception() throw();
 
-  /*}}}*/
-        //void setInvalid() throw();/*{{{*/
+/*}}}*/
+        // Exception(const std::exception& cause) throw();/*{{{*/
 
         /**
-         * @brief Set the description to an invalid text.
+         * @brief Lowlevel constructor expecting a cause for this exception.
+         *
+         * @note If you are calling this constructor in a derived class, make
+         * sure to not forget calling @c createBacktrace() @em after you have
+         * set message and type.
+         *
+         * @param cause The causer for this exception.
          */
-        void setInvalid() throw();
+        Exception(const std::exception& cause) throw();
 
-  /*}}}*/
+/*}}}*/
+        // void createBacktrace() throw();/*{{{*/
 
-        //Type _type;/*{{{*/
+        /**
+         * @brief Creates the backtrace which can be retrieved by what().
+         *
+         * The original cause will be listed on top, the message of this
+         * exception (as returned by getMessage()) will be on bottom.
+         */
+        void createBacktrace() throw();
 
-        /// The type of the exception.
+/*}}}*/
+        // void setMessage(const char*) throw();/*{{{*/
+
+        /**
+         * @brief Sets a short descriptive message about this exception.
+         * @note Will be truncated if it is longer than MESSAGE_BUFFER_SIZE.
+         * @param message String containing a descriptive message.
+         */
+        void setMessage(const char* message) throw();
+
+/*}}}*/
+        // void setType(Type type) throw();/*{{{*/
+
+        /**
+         * @brief Sets the error type and return code of this exception.
+         * @param type Error type and return code.
+         */
+        void setType(Type type) throw();
+
+/*}}}*/
+
+      private:
+        // char _message[MESSAGE_BUFFER_SIZE];/*{{{*/
+
+        /// Holds a short descriptive message about this exception.
+        char _message[MESSAGE_BUFFER_SIZE];
+/*}}}*/
+        // Type _type;/*{{{*/
+
+        /// The type of this exception, which would also be the return code.
         Type _type;
 
-  /*}}}*/
-        //std::string _message;/*{{{*/
+/*}}}*/
+        // char _cause[CAUSE_BUFFER_SIZE];/*{{{*/
 
-        /// The message the exception was given at construction.
-        std::string _message;
+        /// Holds string returned by std::exception.what() of the causer.
+        char _cause[CAUSE_BUFFER_SIZE];
 
-  /*}}}*/
-        //std::string _description;/*{{{*/
+/*}}}*/
+        // char _what[WHAT_BUFFER_SIZE];/*{{{*/
 
-        /// A description of the exception more verbose.
-        std::string _description;
+        /// Buffer for the message returned (and created) by what().
+        char _what[WHAT_BUFFER_SIZE];
 
-  /*}}}*/
-        //bool _isDescriptionCreated;/*{{{*/
+/*}}}*/
 
-        /// Whether the description has already been created.
-        bool _isDescriptionCreated;
-  /*}}}*/
+        // void _setCause(const char* cause) throw();/*{{{*/
+
+        /**
+         * @brief Sets the string describing what caused this exception.
+         * @param cause cstring describing the cause.
+         */
+        void _setCause(const char* cause) throw();
+
+/*}}}*/
     };
   }
 }

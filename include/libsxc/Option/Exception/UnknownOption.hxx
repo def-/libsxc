@@ -1,4 +1,3 @@
-#line 2 "libsxc:Option/OptionPort.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc
@@ -18,13 +17,15 @@
  */
 /*}}}*/
 
+#ifndef OPTION_EXCEPTION_UNKNOWNOPTION_HXX
+#define OPTION_EXCEPTION_UNKNOWNOPTION_HXX
 
-// INCLUDES/*{{{*/
+// INCLUDE/*{{{*/
 
-#include <string>
+#include <exception>
 
-#include <libsxc/Option/OptionPort.hxx>
-#include <libsxc/Option/Exception/InvalidValue.hxx>
+#include <libsxc/Exception/Exception.hxx>
+#include <libsxc/Exception/Type.hxx>
 
 /*}}}*/
 
@@ -32,31 +33,24 @@ namespace libsxc
 {
   namespace Option
   {
-    OptionPort::OptionPort(/*{{{*/
-      Parser *parser,
-      char shortName,
-      std::string longName,
-      std::string variable,
-      std::string description)
-    : Option<int>::Option(
-      parser,
-      shortName,
-      longName,
-      variable,
-      description,
-      -1)
+    namespace Exception
     {
-    }/*}}}*/
-
-    void OptionPort::setValue(std::string rawValue)/*{{{*/
-    {
-      Option<int>::setValue(rawValue);
-
-      if (getValue() < -1 || getValue() > 65535)
-        throw Exception::InvalidValue("port", rawValue.c_str());
-    }/*}}}*/
+      /**
+       * @brief An exception to be thrown when an unknown option or an unknown
+       * specifier for an option is encountered.
+       */
+      class UnknownOption : virtual public libsxc::Exception::Exception
+      {
+        public:
+          UnknownOption(const char* name) throw();
+          UnknownOption(const char* name, const std::exception& cause) throw();
+        private:
+          void _createMessage(const char* name) throw();
+      };
+    }
   }
 }
 
+#endif // OPTION_EXCEPTION_UNKNOWNOPTION_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

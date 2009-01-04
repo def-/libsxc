@@ -16,16 +16,8 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 /*}}}*/
-
-
-
 #ifndef EXCEPTION_TYPE_HXX
 #define EXCEPTION_TYPE_HXX
-
-
-// INCLUDE/*{{{*/
-
-/*}}}*/
 
 namespace libsxc
 {
@@ -33,52 +25,52 @@ namespace libsxc
   {
     /**
      * @brief An enum for all exception types and their exit codes.
+     *
+     * Developers and users of exception classes are free to use any of them.
+     * The error types do not depend on specific exception classes.
      */
-    //enum Type/*{{{*/
-
-    /// Exception types and return codes.
     enum Type
     {
-      NoError = 0, // No problem occured.
-      General = 64,
+      NoError          =   0, // No problem occured.
+      General          =  64,
       // Program option exceptions./*{{{*/
-      OptionNotSet = 80,
-      OptionSetMultiple = 81,
-      OptionUnknown = 82,
-      ValueNotSet = 83,
-      PortInvalid = 84,
-      JidInvalid = 85,
-      ValueInvalid = 86,
-      OptionsConflicting = 87,
-  /*}}}*/
+      ShowUsage        =  -1,
+      ShowVersion      =  -2,
+      MissingOption    =  80,
+      MissingValue     =  81,
+      UnknownOption    =  82,
+      InvalidValue     =  83,
+      Conflict         =  84,
+/*}}}*/
       // Gloox errors./*{{{*/
-      Connection = 90,
-      Registration = 91,
-      PrivacyList = 92,
-      SessionCreate = 93,
-      Stanza = 94,
-      Stream = 95,
-  /*}}}*/
+      // TODO: Do we need them?
+      // Connection = 90,
+      // Registration = 91,
+      // PrivacyList = 92,
+      // SessionCreate = 93,
+      // Stanza = 94,
+      // Stream = 95,
+/*}}}*/
       // File errors./*{{{*/
-      // TODO
-      FileMissing    = 150,
+      BadFile        = 150,
+      BadPath        /* = @ */,
+      FileMissing    /* = @ */,
       FileExists     /* = @ */,
       FileLocked     /* = @ */,
-      BadPath        /* = @ */,
-      BadFile        /* = @ */,
       AccessDenied   /* = @ */,
       OpenFailed     /* = @ */,
       WriteFailed    /* = @ */,
       ReadFailed     /* = @ */,
       CloseFailed    /* = @ */,
-      NoCommand      /* = @ */,
-      InvalidCommand /* = @ */,
-  /*}}}*/
-      // Generic errors:
+/*}}}*/
+      // Command errors:/*{{{*/
+      InvalidCommand = 170,
+      NotACommand    /* = @ */,
+/*}}}*/
+      // Generic errors:/*{{{*/
       InvalidUsage = 200,
-
+/*}}}*/
     };
-  /*}}}*/
   }
 }
 

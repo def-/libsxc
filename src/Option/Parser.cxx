@@ -26,7 +26,10 @@
 #include <vector>
 
 #include <libsxc/Option/Parser.hxx>
-#include <libsxc/Exception/OptionException.hxx>
+#include <libsxc/Option/Exception/Conflict.hxx>
+#include <libsxc/Option/Exception/MissingValue.hxx>
+#include <libsxc/Option/Exception/MissingOption.hxx>
+#include <libsxc/Option/Exception/UnknownOption.hxx>
 
 #ifdef HAVE_CONFIG_H
 # include <config.hxx>
@@ -77,14 +80,14 @@ namespace libsxc
           // Allow multiple options without a short name.
           if (option->getShortName() != ' '
           && (*availOption)->getShortName()
-          == option->getShortName())
-            throw Exception::OptionException(
-              Exception::OptionsConflicting,
-              "-" + option->getShortName());
+          == option->getShortName()) {
+            char name[3] = {0};
+            name[0] = '-';
+            name[1] = option->getShortName();
+            throw Exception::Conflict(name);
+          }
           if ((*availOption)->getLongName() == option->getLongName())
-            throw Exception::OptionException(
-              Exception::OptionsConflicting,
-              "--" + option->getLongName());
+            throw Exception::Conflict(option->getLongName().c_str());
         }
 
         _options.push_back(option);
@@ -127,9 +130,7 @@ namespace libsxc
           + (*option)->getShortName() == *argument) {
             if ((*option)->getRequiresArgument()) {
               if (argument + 1 == arguments.end())
-                throw Exception::OptionException(
-                  Exception::ValueNotSet,
-                  (*option)->getName());
+                throw Exception::MissingValue((*option)->getName().c_str());
               // Get the next argument.
               argument = arguments.erase(argument);
               (*option)->setValue(*argument);
@@ -155,9 +156,7 @@ namespace libsxc
         }
 
         if ((*option)->getIsObligatory() && !(*option)->getIsSet()) {
-          throw Exception::OptionException(
-            Exception::OptionNotSet,
-            (*option)->getName());
+          throw Exception::MissingOption((*option)->getName().c_str());
         }
       }/*}}}*/
 
@@ -184,15 +183,11 @@ namespace libsxc
         }
 
         if ((*option)->getIsObligatory() && !(*option)->getIsSet())
-          throw Exception::OptionException(
-            Exception::OptionNotSet,
-            (*option)->getName());
+          throw Exception::MissingOption((*option)->getName().c_str());
       }/*}}}*/
 
       if (arguments.size())
-        throw Exception::OptionException(
-          Exception::OptionUnknown,
-          arguments.at(0));
+        throw libsxc::Option::Exception::UnknownOption(arguments.at(0).c_str());
     }/*}}}*/
     std::vector<std::string> Parser::getUsage()/*{{{*/
     {

@@ -1,4 +1,3 @@
-#line 2 "libsxc:Option/OptionPort.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc
@@ -18,13 +17,15 @@
  */
 /*}}}*/
 
+#ifndef VALUE_EXCEPTION_INVALIDVALUE_HXX
+#define VALUE_EXCEPTION_INVALIDVALUE_HXX
 
-// INCLUDES/*{{{*/
+// INCLUDE/*{{{*/
 
-#include <string>
+#include <exception>
 
-#include <libsxc/Option/OptionPort.hxx>
-#include <libsxc/Option/Exception/InvalidValue.hxx>
+#include <libsxc/Exception/Exception.hxx>
+#include <libsxc/Exception/Type.hxx>
 
 /*}}}*/
 
@@ -32,31 +33,29 @@ namespace libsxc
 {
   namespace Option
   {
-    OptionPort::OptionPort(/*{{{*/
-      Parser *parser,
-      char shortName,
-      std::string longName,
-      std::string variable,
-      std::string description)
-    : Option<int>::Option(
-      parser,
-      shortName,
-      longName,
-      variable,
-      description,
-      -1)
+    namespace Exception
     {
-    }/*}}}*/
-
-    void OptionPort::setValue(std::string rawValue)/*{{{*/
-    {
-      Option<int>::setValue(rawValue);
-
-      if (getValue() < -1 || getValue() > 65535)
-        throw Exception::InvalidValue("port", rawValue.c_str());
-    }/*}}}*/
+      /**
+       * @brief An exception to be thrown when parameters or values are
+       * missing.
+       */
+      class InvalidValue : virtual public libsxc::Exception::Exception
+      {
+        public:
+          InvalidValue(
+            const char* name,
+            const char* value) throw();
+          InvalidValue(
+            const char* name,
+            const char* value,
+            const std::exception& cause) throw();
+        private:
+          void _createMessage(const char* name, const char* value) throw();
+      };
+    }
   }
 }
 
+#endif // VALUE_EXCEPTION_INVALIDVALUE_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

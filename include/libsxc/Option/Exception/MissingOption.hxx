@@ -17,53 +17,40 @@
  */
 /*}}}*/
 
-
-
-#ifndef EXCEPTION_OPTIONEXCEPTION_HXX
-#define EXCEPTION_OPTIONEXCEPTION_HXX
-
+#ifndef OPTION_EXCEPTION_MISSINGOPTION_HXX
+#define OPTION_EXCEPTION_MISSINGOPTION_HXX
 
 // INCLUDE/*{{{*/
 
-#include <string>
+#include <exception>
 
 #include <libsxc/Exception/Exception.hxx>
+#include <libsxc/Exception/Type.hxx>
 
 /*}}}*/
 
 namespace libsxc
 {
-  namespace Exception
+  namespace Option
   {
-    /**
-     * @brief A class for program argument exceptions.
-     */
-    class OptionException : public Exception
+    namespace Exception
     {
-      public:
-        //OptionException(Type type, std::string message="");/*{{{*/
-
-        /**
-         * @brief Create a gloox exception object.
-         *
-         * @param type The type of the exception.
-         * @param message A text describing the exception more verbose.
-         */
-        OptionException(Type type, std::string message="");
-
-  /*}}}*/
-        //void createDescription() throw();/*{{{*/
-
-        /**
-         * @brief Create the description text.
-         */
-        void createDescription() throw();
-
-  /*}}}*/
-    };
+      /**
+       * @brief An exception to be thrown when parameters or values are
+       * missing.
+       */
+      class MissingOption : virtual public libsxc::Exception::Exception
+      {
+        public:
+          MissingOption(const char* name) throw();
+          MissingOption(const char* name, const std::exception& cause) throw();
+        private:
+          void _createMessage(const char* name) throw();
+      };
+    }
   }
 }
 
-#endif // EXCEPTION_GLOOXEXCEPTION_HXX
+#endif // OPTION_EXCEPTION_MISSINGOPTION_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

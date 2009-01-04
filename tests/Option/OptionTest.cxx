@@ -21,14 +21,18 @@
 // INCLUDE/*{{{*/
 
 #include <string>
+#include <exception>
 #include <gloox/jid.h>
 #include <cppunit/extensions/HelperMacros.h>
 
 #include <OptionTest.hxx>
-#include <libsxc/Exception/OptionException.hxx>
 #include <libsxc/Option/Parser.hxx>
 #include <libsxc/Option/Option.hxx>
 #include <libsxc/Option/OptionPort.hxx>
+
+#include <libsxc/Option/Exception/MissingValue.hxx>
+#include <libsxc/Option/Exception/MissingOption.hxx>
+#include <libsxc/Option/Exception/UnknownOption.hxx>
 
 /*}}}*/
 
@@ -88,8 +92,8 @@ namespace libsxc
 
     try {
       _parser->parse(const_cast<char **>(argv));
-    } catch (Exception::OptionException &e) {
-      CPPUNIT_FAIL(e.getDescription());
+    } catch (std::exception &e) {
+      CPPUNIT_FAIL(e.what());
     }
 
     CPPUNIT_ASSERT(_bool->getValue());
@@ -109,8 +113,8 @@ namespace libsxc
 
     try {
       _parser->parse(const_cast<char **>(argv));
-    } catch (Exception::OptionException &e) {
-      CPPUNIT_FAIL(e.getDescription());
+    } catch (std::exception &e) {
+      CPPUNIT_FAIL(e.what());
     }
 
     CPPUNIT_ASSERT_EQUAL(std::string("abc def ghi jklsak"), _string->getValue());
@@ -123,8 +127,7 @@ namespace libsxc
 
     try {
       _parser->parse(const_cast<char **>(argv));
-    } catch (Exception::OptionException &e) {
-      if (Exception::OptionNotSet == e.getType())
+    } catch (libsxc::Option::Exception::MissingOption &e) {
         return;
     }
     CPPUNIT_FAIL("Missing obligatory option ignored");
@@ -137,9 +140,8 @@ namespace libsxc
 
     try {
       _parser->parse(const_cast<char **>(argv));
-    } catch (Exception::OptionException &e) {
-      if (Exception::ValueNotSet == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::MissingValue &e) {
+      return;
     }
     CPPUNIT_FAIL("Missing value ignored");
   }/*}}}*/
@@ -151,11 +153,10 @@ namespace libsxc
 
     try {
       _parser->parse(const_cast<char **>(argv));
-    } catch (Exception::OptionException &e) {
-      if (Exception::OptionSetMultiple == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::Conflict &e) {
+      return;
     }
-    CPPUNIT_FAIL("Option set multiple times");
+    CPPUNIT_FAIL("Conflicting option ignored");
   }/*}}}*/
   void OptionTest::testUnknownLongOption()/*{{{*/
   {
@@ -165,11 +166,10 @@ namespace libsxc
 
     try {
       _parser->parse(const_cast<char **>(argv));
-    } catch (Exception::OptionException &e) {
-      if (Exception::OptionUnknown == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::UnknownOption &e) {
+      return;
     }
-    CPPUNIT_FAIL("Unknown Option added");
+    CPPUNIT_FAIL("Ignored adding of unknown option.");
   }/*}}}*/
   void OptionTest::testUnknownShortOption()/*{{{*/
   {
@@ -179,33 +179,30 @@ namespace libsxc
 
     try {
       _parser->parse(const_cast<char **>(argv));
-    } catch (Exception::OptionException &e) {
-      if (Exception::OptionUnknown == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::UnknownOption &e) {
+      return;
     }
-    CPPUNIT_FAIL("Unknown Option added");
+    CPPUNIT_FAIL("Ignored adding of unknown option.");
   }/*}}}*/
   void OptionTest::testConflictingShortName()/*{{{*/
   {
     try {
       Option::Option<int> conflicting(
         _parser, 'd', "conflicting", "barfoo", "descr");
-    } catch (Exception::OptionException &e) {
-      if (Exception::OptionsConflicting == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::Conflict &e) {
+      return;
     }
-    CPPUNIT_FAIL("Conflicting Option added");
+    CPPUNIT_FAIL("Conflicting option ignored");
   }/*}}}*/
   void OptionTest::testConflictingLongName()/*{{{*/
   {
     try {
       Option::Option<char> conflicting(
         _parser, 'z', "long", "bar", "descr", 'y');
-    } catch (Exception::OptionException &e) {
-      if (Exception::OptionsConflicting == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::Conflict &e) {
+      return;
     }
-    CPPUNIT_FAIL("Conflicting Option added");
+    CPPUNIT_FAIL("Conflicting option ignored");
   }/*}}}*/
   void OptionTest::testJids()/*{{{*/
   {
@@ -242,9 +239,8 @@ namespace libsxc
 
     try {
       jid.setValue(rawJid);
-    } catch (Exception::OptionException &e) {
-      if (Exception::JidInvalid == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::InvalidValue &e) {
+      return;
     }
     CPPUNIT_FAIL("Invalid JID " + rawJid + " accepted");
   }/*}}}*/
@@ -256,7 +252,7 @@ namespace libsxc
 
     try {
       jid.setValue(rawJid);
-    } catch (Exception::OptionException &e) {
+    } catch (libsxc::Option::Exception::InvalidValue &e) {
       CPPUNIT_FAIL("Valid JID " + rawJid + " not accepted");
     }
   }/*}}}*/
@@ -269,9 +265,8 @@ namespace libsxc
 
     try {
       option.setValue(rawValue);
-    } catch (Exception::OptionException &e) {
-      if (Exception::ValueInvalid == e.getType())
-        return;
+    } catch (libsxc::Option::Exception::InvalidValue &e) {
+      return;
     }
     CPPUNIT_FAIL("Invalid type conversion of " + rawValue + " worked");
   }/*}}}*/
@@ -284,7 +279,7 @@ namespace libsxc
 
     try {
       option.setValue(rawValue);
-    } catch (Exception::OptionException &e) {
+    } catch (libsxc::Option::Exception::InvalidValue &e) {
       CPPUNIT_FAIL(
         "Valid type conversion of " + rawValue + " did not work");
     }

@@ -18,13 +18,13 @@
  */
 /*}}}*/
 
-
 // INCLUDE/*{{{*/
-
-#include <string>
 
 #include <libsxc/Exception/Exception.hxx>
 #include <libsxc/Exception/Type.hxx>
+
+#include <cstring>
+#include <exception>
 
 /*}}}*/
 
@@ -32,45 +32,140 @@ namespace libsxc
 {
   namespace Exception
   {
-    Exception::Exception(Type type, std::string &message) throw()/*{{{*/
-    : _type(type), _message(message), _isDescriptionCreated(false)
+    Exception::Exception(const char* message, Type type) throw()/*{{{*/
+    : _type(type)
     {
-    }/*}}}*/
-    Exception::Exception(Type type, const char *message) throw()/*{{{*/
-    : _type(type), _isDescriptionCreated(false)
-    {
-      _message = *message;
-    }/*}}}*/
+      setMessage(message);
+      _cause[0] = '\0';
+      _what[0]  = '\0';
 
+      createBacktrace();
+    }
+
+/*}}}*/
+    Exception::Exception(/*{{{*/
+      const char* message, Type type, const std::exception& cause) throw()
+    : _type(type)
+    {
+      setMessage(message);
+      _setCause(cause.what());
+      _what[0] = '\0';
+
+      createBacktrace();
+    }
+
+/*}}}*/
     Exception::~Exception() throw()/*{{{*/
     {
-    }/*}}}*/
-    const char *Exception::what() const throw()/*{{{*/
-    {
-      return getMessage().c_str();
-    }/*}}}*/
+    }
 
-    const std::string &Exception::getMessage() const throw()/*{{{*/
+/*}}}*/
+    const char* Exception::what() const throw()/*{{{*/
+    {
+      return _what;
+    }
+
+/*}}}*/
+    const char* Exception::getMessage() const throw()/*{{{*/
     {
       return _message;
-    }/*}}}*/
-    const std::string &Exception::getDescription() throw()/*{{{*/
-    {
-      if (!_isDescriptionCreated) {
-        createDescription();
-        _isDescriptionCreated = true;
-      }
-      return _description;
-    }/*}}}*/
+    }
+
+/*}}}*/
     Type Exception::getType() const throw()/*{{{*/
     {
       return _type;
-    }/*}}}*/
+    }
 
-    void Exception::setInvalid() throw()/*{{{*/
+/*}}}*/
+    const char* Exception::getCause() const throw()/*{{{*/
     {
-      _description = "Invalid exception type.";
-    }/*}}}*/
+      return _cause;
+    }
+
+/*}}}*/
+
+    Exception::Exception() throw()/*{{{*/
+    : _type(General)
+    {
+      _message[0] = '\0';
+      _cause[0]   = '\0';
+      _what[0]    = '\0';
+    }
+
+/*}}}*/
+    Exception::Exception(const std::exception& cause) throw()/*{{{*/
+    : _type(General)
+    {
+      _message[0] = '\0';
+      _setCause(cause.what());
+      _what[0]    = '\0';
+    }
+
+/*}}}*/
+    void Exception::createBacktrace() throw()/*{{{*/
+    {
+      if ('\0' != _what[0])
+        return;
+
+      strcpy(_what, _cause);
+      strcat(_what, _message);
+    }
+
+/*}}}*/
+    void Exception::setMessage(const char* message) throw()/*{{{*/
+    {
+      strncpy(_message, message, MESSAGE_BUFFER_SIZE - 1);
+      // The message supplied may be longer than the buffers size. strncopy()
+      // will neither write beyond the bounds, nor will it append a trailing
+      // null character if the source contains too much characters. Terminate
+      // cstring manually so that we do not end up using a string which is not
+      // terminated by null.
+      _message[MESSAGE_BUFFER_SIZE - 1] = '\0';
+
+      // Make sure _message ends with a newline.
+      const size_t length = strlen(_message);
+      if ('\n' == _message[length - 1])
+        return;
+      if ((MESSAGE_BUFFER_SIZE - 1) > length) {
+        // Enough space left to increase length of string by appending one
+        // newline.
+        _message[length + 1] = '\0';
+        _message[length]     = '\n';
+      } else {
+        // Not enough space left, overwrite last char. String has most likely
+        // already been truncated.
+        _message[length - 1] = '\n';
+      }
+    }
+
+/*}}}*/
+    void Exception::setType(Type type) throw()/*{{{*/
+    {
+      _type = type;
+    }
+
+/*}}}*/
+
+    void Exception::_setCause(const char* cause) throw()/*{{{*/
+    {
+      // See setMessage() for explanation.
+
+      strncpy(_cause, cause, CAUSE_BUFFER_SIZE - 1);
+      _cause[CAUSE_BUFFER_SIZE - 1] = '\0';
+
+      const size_t length = strlen(_cause);
+      if ('\n' == _cause[length - 1])
+        return;
+      if ((CAUSE_BUFFER_SIZE - 1) > length) {
+        _cause[length + 1] = '\0';
+        _cause[length]     = '\n';
+      } else {
+        _cause[length - 1] = '\n';
+      }
+    }
+
+/*}}}*/
   }
 }
 
