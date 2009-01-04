@@ -24,7 +24,6 @@
 #include <gloox/jid.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include <libsxc/Exception/OptionException.hxx>
 #include <libsxc/Option/Parser.hxx>
 #include <libsxc/Option/Option.hxx>
 #include <libsxc/Option/OptionPort.hxx>

@@ -27,7 +27,6 @@
 
 #include <libsxc/Option/OptionBase.hxx>
 #include <libsxc/Option/Parser.hxx>
-#include <libsxc/Exception/OptionException.hxx>
 
 /*}}}*/
 
