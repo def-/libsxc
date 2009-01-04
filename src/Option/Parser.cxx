@@ -43,6 +43,13 @@ namespace libsxc
 {
   namespace Option
   {
+    Parser::Parser()/*{{{*/
+    : _showHelp(false)
+    , _showVersion(false)
+    , _programName("")
+    {
+    }/*}}}*/
+
     bool Parser::doShowHelp()/*{{{*/
     {
       return _showHelp;

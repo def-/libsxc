@@ -44,6 +44,8 @@ namespace libsxc
     class Parser
     {
       public:
+        Parser();
+
         bool doShowHelp();
         bool doShowVersion();
         //void addOption(OptionBase *option);/*{{{*/
