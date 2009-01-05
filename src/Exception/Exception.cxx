@@ -21,7 +21,8 @@
 // INCLUDE/*{{{*/
 
 #include <libsxc/Exception/Exception.hxx>
-#include <libsxc/Exception/Type.hxx>
+
+#include <libsxc/Exit/Code.hxx>
 
 #include <cstring>
 #include <exception>
@@ -32,8 +33,8 @@ namespace libsxc
 {
   namespace Exception
   {
-    Exception::Exception(const char* message, Type type) throw()/*{{{*/
-    : _type(type)
+    Exception::Exception(const char* message, int exitCode) throw()/*{{{*/
+    : _exitCode(exitCode)
     {
       setMessage(message);
       _cause[0] = '\0';
@@ -44,8 +45,8 @@ namespace libsxc
 
 /*}}}*/
     Exception::Exception(/*{{{*/
-      const char* message, Type type, const std::exception& cause) throw()
-    : _type(type)
+      const char* message, int exitCode, const std::exception& cause) throw()
+    : _exitCode(exitCode)
     {
       setMessage(message);
       _setCause(cause.what());
@@ -72,9 +73,9 @@ namespace libsxc
     }
 
 /*}}}*/
-    Type Exception::getType() const throw()/*{{{*/
+    int Exception::getExitCode() const throw()/*{{{*/
     {
-      return _type;
+      return _exitCode;
     }
 
 /*}}}*/
@@ -86,7 +87,7 @@ namespace libsxc
 /*}}}*/
 
     Exception::Exception() throw()/*{{{*/
-    : _type(General)
+    : _exitCode(Exit::General)
     {
       _message[0] = '\0';
       _cause[0]   = '\0';
@@ -95,7 +96,7 @@ namespace libsxc
 
 /*}}}*/
     Exception::Exception(const std::exception& cause) throw()/*{{{*/
-    : _type(General)
+    : _exitCode(Exit::General)
     {
       _message[0] = '\0';
       _setCause(cause.what());
@@ -140,9 +141,9 @@ namespace libsxc
     }
 
 /*}}}*/
-    void Exception::setType(Type type) throw()/*{{{*/
+    void Exception::setExitCode(int exitCode) throw()/*{{{*/
     {
-      _type = type;
+      _exitCode = exitCode;
     }
 
 /*}}}*/

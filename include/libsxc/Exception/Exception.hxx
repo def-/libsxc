@@ -24,8 +24,6 @@
 
 #include <exception>
 
-#include <libsxc/Exception/Type.hxx>
-
 /*}}}*/
 
 namespace libsxc
@@ -75,7 +73,7 @@ namespace libsxc
 
 /*}}}*/
 
-        // Exception(const char* message, Type type) throw();/*{{{*/
+        // Exception(const char* message, int exitCode) throw();/*{{{*/
 
         /**
          * @brief Default constructor.
@@ -84,24 +82,24 @@ namespace libsxc
          * MESSAGE_BUFFER_SIZE.
          *
          * @param message A message describing the exception.
-         * @param type The error type.
+         * @param exitCode The number to return when stopping the application.
          */
-        Exception(const char* message, Type type) throw();
+        Exception(const char* message, int exitCode) throw();
 
 /*}}}*/
-        // Exception(const char*, Type, const std::exception&) throw();/*{{{*/
+        // Exception(message, exitCode, const std::exception&) throw();/*{{{*/
 
         /**
          * @brief Constructor to be called when another exception has already
          * been caught.
          *
          * @param message A message describing the exception.
-         * @param type The error type.
+         * @param exitCode The number to return when stopping the application.
          * @param cause The causer for this exception.
-         * @see Exception::Exception(const char*, Type)
+         * @see Exception::Exception(const char*, exitCode)
          */
         Exception(
-          const char* message, Type type, const std::exception& cause) throw();
+          const char* message, int exitCode, const std::exception& cause) throw();
 
 /*}}}*/
         // virtual ~Exception() throw()/*{{{*/
@@ -136,13 +134,13 @@ namespace libsxc
         virtual const char* getMessage() const throw();
 
 /*}}}*/
-        // virtual Type getType() const throw();/*{{{*/
+        // virtual int getExitCode() const throw();/*{{{*/
 
         /**
-         * @brief Returns the type (return code) of the exception.
-         * @return The type of the exception.
+         * @brief Returns the exit code of the exception.
+         * @return The exit code of the exception.
          */
-        virtual Type getType() const throw();
+        virtual int getExitCode() const throw();
 
 /*}}}*/
         // const char* getCause() const throw();/*{{{*/
@@ -207,13 +205,13 @@ namespace libsxc
         void setMessage(const char* message) throw();
 
 /*}}}*/
-        // void setType(Type type) throw();/*{{{*/
+        // void setExitCode(int exitCode) throw();/*{{{*/
 
         /**
-         * @brief Sets the error type and return code of this exception.
-         * @param type Error type and return code.
+         * @brief Sets the exit code of this exception.
+         * @param exitCode The exit code.
          */
-        void setType(Type type) throw();
+        void setExitCode(int exitCode) throw();
 
 /*}}}*/
 
@@ -223,10 +221,10 @@ namespace libsxc
         /// Holds a short descriptive message about this exception.
         char _message[MESSAGE_BUFFER_SIZE];
 /*}}}*/
-        // Type _type;/*{{{*/
+        // int _exitCode;/*{{{*/
 
-        /// The type of this exception, which would also be the return code.
-        Type _type;
+        /// The exit code of this exception.
+        int _exitCode;
 
 /*}}}*/
         // char _cause[CAUSE_BUFFER_SIZE];/*{{{*/

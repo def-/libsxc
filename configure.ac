@@ -261,6 +261,7 @@ AC_CONFIG_FILES([
     include/libsxc/Debug/Makefile
     include/libsxc/Error/Makefile
     include/libsxc/Exception/Makefile
+    include/libsxc/Exit/Makefile
     include/libsxc/Option/Makefile
     include/libsxc/Option/Exception/Makefile
     include/libsxc/Signal/Makefile

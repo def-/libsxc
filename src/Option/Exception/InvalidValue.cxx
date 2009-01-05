@@ -23,7 +23,7 @@
 #include <libsxc/Option/Exception/InvalidValue.hxx>
 
 #include <libsxc/Exception/Exception.hxx>
-#include <libsxc/Exception/Type.hxx>
+#include <libsxc/Exit/Code.hxx>
 
 #include <exception>
 #include <cstring>
@@ -43,7 +43,7 @@ namespace libsxc
       : libsxc::Exception::Exception()
       {
         _createMessage(name, value);
-        setType(libsxc::Exception::InvalidValue);
+        setExitCode(Exit::InvalidValue);
         createBacktrace();
       }
 
@@ -55,7 +55,7 @@ namespace libsxc
       : libsxc::Exception::Exception(cause)
       {
         _createMessage(name, value);
-        setType(libsxc::Exception::InvalidValue);
+        setExitCode(Exit::InvalidValue);
         createBacktrace();
       }
 

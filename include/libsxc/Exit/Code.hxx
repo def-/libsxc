@@ -16,23 +16,26 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 /*}}}*/
-#ifndef EXCEPTION_TYPE_HXX
-#define EXCEPTION_TYPE_HXX
+#ifndef EXIT_CODE_HXX
+#define EXIT_CODE_HXX
 
 namespace libsxc
 {
-  namespace Exception
+  namespace Exit
   {
     /**
-     * @brief An enum for all exception types and their exit codes.
+     * @brief An enum for exit codes.
      *
      * Developers and users of exception classes are free to use any of them.
-     * The error types do not depend on specific exception classes.
+     * The exit codes do not depend on specific exception classes.
      */
-    enum Type
+    enum Code
     {
+      // Generic errors:/*{{{*/
       NoError          =   0, // No problem occured.
       General          =  64,
+      InvalidUsage     = 200,
+/*}}}*/
       // Program option exceptions./*{{{*/
       MissingOption    =  80,
       MissingValue     =  81,
@@ -40,38 +43,10 @@ namespace libsxc
       InvalidValue     =  83,
       Conflict         =  84,
 /*}}}*/
-      // Gloox errors./*{{{*/
-      // TODO: Do we need them?
-      // Connection = 90,
-      // Registration = 91,
-      // PrivacyList = 92,
-      // SessionCreate = 93,
-      // Stanza = 94,
-      // Stream = 95,
-/*}}}*/
-      // File errors./*{{{*/
-      BadFile        = 150,
-      BadPath        /* = @ */,
-      FileMissing    /* = @ */,
-      FileExists     /* = @ */,
-      FileLocked     /* = @ */,
-      AccessDenied   /* = @ */,
-      OpenFailed     /* = @ */,
-      WriteFailed    /* = @ */,
-      ReadFailed     /* = @ */,
-      CloseFailed    /* = @ */,
-/*}}}*/
-      // Command errors:/*{{{*/
-      InvalidCommand = 170,
-      NotACommand    /* = @ */,
-/*}}}*/
-      // Generic errors:/*{{{*/
-      InvalidUsage = 200,
-/*}}}*/
     };
   }
 }
 
-#endif // EXCEPTION_TYPE_HXX
+#endif // EXIT_CODE_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker
