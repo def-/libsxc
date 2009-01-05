@@ -1,7 +1,7 @@
 #include <string>
 
-#ifndef LOGGER_HXX
-#define LOGGER_HXX
+#ifndef LIBSXC_LOGGER_HXX
+#define LIBSXC_LOGGER_HXX
 
 # define LOG libsxc::Logger(__FILE__, __LINE__).log
 
@@ -68,4 +68,4 @@ namespace libsxc
 
 #include <libsxc/Logger.ixx>
 
-#endif // LOGGER_HXX
+#endif // LIBSXC_LOGGER_HXX

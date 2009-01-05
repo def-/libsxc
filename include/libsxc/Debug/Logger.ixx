@@ -18,8 +18,8 @@
  */
 /*}}}*/
 
-#ifndef DEBUG_LOGGER_IXX
-#define DEBUG_LOGGER_IXX
+#ifndef LIBSXC_DEBUG_LOGGER_IXX
+#define LIBSXC_DEBUG_LOGGER_IXX
 
 // INCLUDE/*{{{*/
 
@@ -42,6 +42,6 @@ namespace libsxc
   }
 }
 
-#endif // DEBUG_LOGGER_IXX
+#endif // LIBSXC_DEBUG_LOGGER_IXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

@@ -17,8 +17,8 @@
  */
 /*}}}*/
 
-#ifndef SIGNAL_WAITER_HXX
-#define SIGNAL_WAITER_HXX
+#ifndef LIBSXC_SIGNAL_WAITER_HXX
+#define LIBSXC_SIGNAL_WAITER_HXX
 
 // INCLUDES/*{{{*/
 
@@ -160,7 +160,7 @@ namespace libsxc
   }
 }
 
-#endif // SIGNAL_WAITER_HXX
+#endif // LIBSXC_SIGNAL_WAITER_HXX
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

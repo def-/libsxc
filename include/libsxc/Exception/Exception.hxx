@@ -17,8 +17,8 @@
  */
 /*}}}*/
 
-#ifndef EXCEPTION_EXCEPTION_HXX
-#define EXCEPTION_EXCEPTION_HXX
+#ifndef LIBSXC_EXCEPTION_EXCEPTION_HXX
+#define LIBSXC_EXCEPTION_EXCEPTION_HXX
 
 // INCLUDE/*{{{*/
 
@@ -253,6 +253,6 @@ namespace libsxc
   }
 }
 
-#endif // EXCEPTION_EXCEPTION_HXX
+#endif // LIBSXC_EXCEPTION_EXCEPTION_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

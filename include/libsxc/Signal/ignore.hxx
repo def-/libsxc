@@ -17,8 +17,8 @@
  */
 /*}}}*/
 
-#ifndef SIGNAL_IGNORE_HXX
-#define SIGNAL_IGNORE_HXX
+#ifndef LIBSXC_SIGNAL_IGNORE_HXX
+#define LIBSXC_SIGNAL_IGNORE_HXX
 
 // INCLUDES/*{{{*/
 #include <libsxc/Signal/Handler.hxx>
@@ -59,7 +59,7 @@ namespace libsxc
   }
 }
 
-#endif // SIGNAL_IGNORE_HXX
+#endif // LIBSXC_SIGNAL_IGNORE_HXX
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

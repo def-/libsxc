@@ -19,8 +19,8 @@
 
 
 
-#ifndef OPTION_OPTIONPORT_HXX
-#define OPTION_OPTIONPORT_HXX
+#ifndef LIBSXC_OPTION_OPTIONPORT_HXX
+#define LIBSXC_OPTION_OPTIONPORT_HXX
 
 
 // INCLUDE/*{{{*/
@@ -81,6 +81,6 @@ namespace libsxc
 }
 
 
-#endif // OPTION_OPTIONPORT_HXX
+#endif // LIBSXC_OPTION_OPTIONPORT_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

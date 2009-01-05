@@ -17,8 +17,8 @@
  */
 /*}}}*/
 
-#ifndef OPTION_EXCEPTION_UNKNOWNOPTION_HXX
-#define OPTION_EXCEPTION_UNKNOWNOPTION_HXX
+#ifndef LIBSXC_OPTION_EXCEPTION_UNKNOWNOPTION_HXX
+#define LIBSXC_OPTION_EXCEPTION_UNKNOWNOPTION_HXX
 
 // INCLUDE/*{{{*/
 
@@ -50,6 +50,6 @@ namespace libsxc
   }
 }
 
-#endif // OPTION_EXCEPTION_UNKNOWNOPTION_HXX
+#endif // LIBSXC_OPTION_EXCEPTION_UNKNOWNOPTION_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

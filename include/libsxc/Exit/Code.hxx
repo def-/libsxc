@@ -16,8 +16,8 @@
   OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 /*}}}*/
-#ifndef EXIT_CODE_HXX
-#define EXIT_CODE_HXX
+#ifndef LIBSXC_EXIT_CODE_HXX
+#define LIBSXC_EXIT_CODE_HXX
 
 namespace libsxc
 {
@@ -47,6 +47,6 @@ namespace libsxc
   }
 }
 
-#endif // EXIT_CODE_HXX
+#endif // LIBSXC_EXIT_CODE_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

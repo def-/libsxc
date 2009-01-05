@@ -17,15 +17,15 @@
  */
 /*}}}*/
 
-#ifndef DEBUG_LOGGER_HXX
-#define DEBUG_LOGGER_HXX
+#ifndef LIBSXC_DEBUG_LOGGER_HXX
+#define LIBSXC_DEBUG_LOGGER_HXX
 
 // INCLUDE/*{{{*/
 
 
 /*}}}*/
 
-#ifdef DEBUG
+#ifdef LIBSXC_DEBUG
 # define LOG2(text) libsxc::Debug2::Logger<libsxc::Debug2::Format, libsxc::Debug2::Output>().log(__FILE__, __LINE__, text)
 #else
 # define LOG2(text)
@@ -87,6 +87,6 @@ namespace libsxc
 
 #include <libsxc/Debug/Logger.ixx>
 
-#endif // DEBUG_LOGGER_HXX
+#endif // LIBSXC_DEBUG_LOGGER_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

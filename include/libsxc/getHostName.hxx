@@ -17,8 +17,8 @@
  */
 /*}}}*/
 
-#ifndef GETHOSTENAME_H
-#define GETHOSTENAME_H
+#ifndef LIBSXC_GETHOSTNAME_HXX
+#define LIBSXC_GETHOSTNAME_HXX
 
 // INCLUDES/*{{{*/
 
@@ -40,7 +40,7 @@ namespace libsxc
   /*}}}*/
 }
 
-#endif // GETHOSTENAME_H
+#endif // LIBSXC_GETHOSTNAME_HXX
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

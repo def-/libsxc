@@ -27,8 +27,8 @@
 /*}}}*/
 
 
-#ifndef GENERATESTRING_HXX
-#define GENERATESTRING_HXX
+#ifndef LIBSXC_GENERATESTRING_HXX
+#define LIBSXC_GENERATESTRING_HXX
 
 
 namespace libsxc
@@ -90,6 +90,6 @@ namespace libsxc
 }
 
 
-#endif // GENERATESTRING_HXX
+#endif // LIBSXC_GENERATESTRING_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

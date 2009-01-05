@@ -19,8 +19,8 @@
 
 
 
-#ifndef OPTION_OPTIONBASE_HXX
-#define OPTION_OPTIONBASE_HXX
+#ifndef LIBSXC_OPTION_OPTIONBASE_HXX
+#define LIBSXC_OPTION_OPTIONBASE_HXX
 
 
 // INCLUDE/*{{{*/
@@ -208,7 +208,7 @@ namespace libsxc
 }
 
 
-#endif // OPTION_OPTIONBASE_HXX
+#endif // LIBSXC_OPTION_OPTIONBASE_HXX
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker
