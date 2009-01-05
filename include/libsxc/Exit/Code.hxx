@@ -34,7 +34,6 @@ namespace libsxc
       // Generic errors:/*{{{*/
       NoError          =   0, // No problem occured.
       General          =  64,
-      InvalidUsage     = 200,
 /*}}}*/
       // Program option exceptions./*{{{*/
       MissingOption    =  80,
