@@ -29,7 +29,7 @@
 #include <iostream>
 
 #include <libsxc/getHostName.hxx>
-#include <libsxc/Logger.hxx>
+#include <libsxc/Debug/Logger.hxx>
 
 /*}}}*/
 
