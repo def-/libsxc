@@ -26,7 +26,7 @@
 
 namespace libsxc
 {
-  namespace Error2
+  namespace Error
   {
     /**
      * Error handling interface.
