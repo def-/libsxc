@@ -20,16 +20,15 @@
 
 // INCLUDES/*{{{*/
 
+#ifdef HAVE_CONFIG_H
+# include <config.hxx>
+#endif
+
 #include <string>
 #include <unistd.h>
 #include <iostream>
 
 #include <libsxc/getHostName.hxx>
-
-#ifdef HAVE_CONFIG_H
-# include <config.hxx>
-#endif
-
 #include <libsxc/Logger.hxx>
 
 /*}}}*/
@@ -40,8 +39,9 @@ namespace libsxc
   {
     const unsigned int hostNameSize = 256;
     char hostName[hostNameSize];
-    if (0 != gethostname(hostName, hostNameSize)) // This should never happen!
-      LOG<Error>("Error getting the hostname of this system.");
+    if (0 != gethostname(hostName, hostNameSize)) { // This should never happen!
+      //LOG<Error>("Error getting the hostname of this system."); // FIXME
+    }
     return hostName;
   }/*}}}*/
 }

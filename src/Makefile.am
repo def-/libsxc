@@ -9,4 +9,4 @@ libsxc_la_LIBADD = \
   Exception/libException.la \
   Option/libOption.la \
   Signal/libSignal.la
-libsxc_la_SOURCES = generateString.cxx getHostName.cxx Logger.cxx
+libsxc_la_SOURCES = generateString.cxx getHostName.cxx
