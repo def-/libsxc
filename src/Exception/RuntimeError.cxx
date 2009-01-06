@@ -20,9 +20,9 @@
 
 // INCLUDE/*{{{*/
 
-#include <libsxc/Exception/Exception.hxx>
 #include <libsxc/Exception/RuntimeError.hxx>
 
+#include <libsxc/Exception/Exception.hxx>
 #include <libsxc/Exit/Code.hxx>
 
 #include <exception>

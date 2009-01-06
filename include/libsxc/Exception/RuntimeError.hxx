@@ -48,7 +48,7 @@ namespace libsxc
         RuntimeError(const char* message) throw();
 
 /*}}}*/
-        // RuntimeError(const char* message, const std::exception& cause) throw();/*{{{*/
+        // RuntimeError(const char*, const std::exception&) throw();/*{{{*/
 
         /**
          * @brief Extended default constructor using a backtrace.
