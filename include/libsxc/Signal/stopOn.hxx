@@ -36,6 +36,8 @@ namespace libsxc
     {
       public:
         Stopper(Waiter &waiter);
+        virtual ~Stopper() {};
+
         //void handle(unsigned int signal) {}/*{{{*/
 
         /**

@@ -62,6 +62,7 @@ namespace libsxc
           std::string description);
 
   /*}}}*/
+        virtual ~OptionPort() {}
 
         //void setValue(std::string rawValue);/*{{{*/
 

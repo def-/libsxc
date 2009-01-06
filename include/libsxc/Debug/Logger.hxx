@@ -37,6 +37,8 @@ namespace libsxc
   {
     class Format
     {
+      public:
+        virtual ~Format() {}
       protected:
         //const string format(file, line, &raw);/*{{{*/
 
@@ -52,6 +54,8 @@ namespace libsxc
 
     class Output
     {
+      public:
+        virtual ~Output() {}
       protected:
         //void print(const std::string &text);/*{{{*/
 

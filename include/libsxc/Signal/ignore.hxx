@@ -35,6 +35,8 @@ namespace libsxc
     class Ignorer : public Handler
     {
       public:
+        virtual ~Ignorer() {}
+
         //void handle(unsigned int signal) {}/*{{{*/
 
         /**

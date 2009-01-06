@@ -34,6 +34,8 @@ namespace libsxc
     class Handler
     {
       public:
+        virtual ~Handler() {}
+
         //virtual void print(const std::string &message) = 0;/*{{{*/
 
         /**

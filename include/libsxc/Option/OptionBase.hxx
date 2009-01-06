@@ -64,6 +64,7 @@ namespace libsxc
           bool isObligatory);
 
   /*}}}*/
+        virtual ~OptionBase() {}
 
         //virtual void setValue(std::string rawValue="");/*{{{*/
 

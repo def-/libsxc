@@ -119,6 +119,7 @@ namespace libsxc
           std::string description);
 
   /*}}}*/
+        virtual ~Option() {}
 
         //void setValue(std::string rawValue="");/*{{{*/
 
