@@ -29,7 +29,7 @@
 
 namespace libsxc
 {
-  namespace Debug2
+  namespace Debug
   {
     template <typename FormatPolicy, typename OutputPolicy>
     void Logger<FormatPolicy, OutputPolicy>::log(

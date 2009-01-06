@@ -1,7 +1,7 @@
 SUBDIRS = Debug Error Exception Exit Option Signal
 
 installdir = $(includedir)/$(PACKAGE)
-install_HEADERS = generateString.hxx getHostName.hxx Logger.hxx Logger.ixx
+install_HEADERS = generateString.hxx getHostName.hxx
 
 # Only remove our own directory. No weird stuff like removing every empty
 # dir.

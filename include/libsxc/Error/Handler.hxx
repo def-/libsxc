@@ -26,7 +26,7 @@
 
 namespace libsxc
 {
-  namespace Error2
+  namespace Error
   {
     /**
      * Error handling interface.
@@ -37,9 +37,12 @@ namespace libsxc
         //virtual void print(const std::string &message) = 0;/*{{{*/
 
         /**
-         * This method is called to print an error message.
+         * @brief This method is called to print an error message.
          *
-         * @ref message The message to print.
+         * Call this method in case some error occured and you want to notify
+         * the user. For critical errors, see @ref printCritical.
+         *
+         * @param message The raw message to print; may be formatted.
          */
         virtual void print(const std::string &message) = 0;
 
@@ -47,9 +50,12 @@ namespace libsxc
         //virtual void printCritical(const std::string &message) = 0;/*{{{*/
 
         /**
-         * This method prints the messages of critical errors.
+         * @brief This method prints the messages of critical errors.
          *
-         * @ref message The message to print.
+         * This method should be called on errors, that are a serious threat to
+         * the correct running of the program.
+         *
+         * @param message The message to print.
          */
         virtual void printCritical(const std::string &message) = 0;
 

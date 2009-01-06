@@ -30,7 +30,7 @@
 
 namespace libsxc
 {
-  namespace Debug2
+  namespace Debug
   {
     const std::string Format::format(/*{{{*/
       const std::string file,

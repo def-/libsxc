@@ -26,14 +26,14 @@
 /*}}}*/
 
 #ifdef DEBUG
-# define LOG2(text) libsxc::Debug2::Logger<libsxc::Debug2::Format, libsxc::Debug2::Output>().log(__FILE__, __LINE__, text)
+# define LOG(text) libsxc::Debug::Logger<libsxc::Debug::Format, libsxc::Debug::Output>().log(__FILE__, __LINE__, text)
 #else
-# define LOG2(text)
+# define LOG(text)
 #endif
 
 namespace libsxc
 {
-  namespace Debug2
+  namespace Debug
   {
     class Format
     {

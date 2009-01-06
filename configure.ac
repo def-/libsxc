@@ -251,7 +251,6 @@ AC_CONFIG_FILES([
     Doxyfile
     src/Makefile
     src/Debug/Makefile
-    src/Error/Makefile
     src/Exception/Makefile
     src/Option/Makefile
     src/Option/Exception/Makefile

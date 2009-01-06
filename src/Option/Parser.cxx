@@ -21,6 +21,10 @@
 
 // INCLUDE/*{{{*/
 
+#ifdef HAVE_CONFIG_H
+# include <config.hxx>
+#endif
+
 #include <sstream>
 #include <string>
 #include <vector>
@@ -30,12 +34,7 @@
 #include <libsxc/Option/Exception/MissingValue.hxx>
 #include <libsxc/Option/Exception/MissingOption.hxx>
 #include <libsxc/Option/Exception/UnknownOption.hxx>
-
-#ifdef HAVE_CONFIG_H
-# include <config.hxx>
-#endif
-
-#include <libsxc/Logger.hxx>
+#include <libsxc/Debug/Logger.hxx>
 
 /*}}}*/
 
@@ -69,7 +68,7 @@ namespace libsxc
          << "\", desc: \"" << option->getDescription()
          << "\", req: \"" << option->getRequiresArgument()
          << "\", oblig: \"" << option->getIsObligatory() << "\")";
-      LOG<Debug>(ss.str());
+      LOG(ss.str());
 
       // The options having a name have to be parsed first. After
       // that all the nameless options can be passed. Therefore the
@@ -121,7 +120,7 @@ namespace libsxc
         for (
         std::vector<std::string>::iterator argument = arguments.begin();
         argument != arguments.end();) {
-          LOG<Debug>(
+          LOG(
             "Parse normal option: (option: \"" +
             (*option)->getName() + "\", arg: \"" +
             *argument + "\").");
@@ -176,7 +175,7 @@ namespace libsxc
         for (
         std::vector<std::string>::iterator argument = arguments.begin();
         argument != arguments.end() && !(*option)->getIsSet();) {
-          LOG<Debug>(
+          LOG(
             "Parse nameless option: (option: \"" +
             (*option)->getName() + "\", arg: \"" +
             *argument + "\").");

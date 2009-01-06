@@ -26,8 +26,13 @@
 
 // INCLUDE/*{{{*/
 
+#ifdef HAVE_CONFIG_H
+# include <config.hxx>
+#endif
+
 #include <libsxc/Option/Exception/Conflict.hxx>
 #include <libsxc/Option/Exception/InvalidValue.hxx>
+#include <libsxc/Debug/Logger.hxx>
 
 #include <vector>
 #include <string>
@@ -35,12 +40,6 @@
 #include <stdexcept>
 
 #include <gloox/jid.h>
-
-#ifdef HAVE_CONFIG_H
-# include <config.hxx>
-#endif
-
-#include <libsxc/Logger.hxx>
 
 /*}}}*/
 
@@ -160,7 +159,7 @@ namespace libsxc
       if (_isSet) // Only allow to be set one time.
         throw Exception::Conflict(getName().c_str());
 
-      LOG<Debug>(
+      LOG(
         "Set value: (option: \"" + getName() + "\", value: \"" +
         rawValue + "\").");
 
