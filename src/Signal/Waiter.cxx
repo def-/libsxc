@@ -60,9 +60,7 @@ namespace libsxc
     {
       if (_running) {
         stop();
-        int status = pthread_join(_threadId, NULL);
-        if (status)
-          return;
+        pthread_join(_threadId, NULL);
       }
 
       for (

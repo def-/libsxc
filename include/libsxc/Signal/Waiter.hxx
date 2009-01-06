@@ -23,6 +23,7 @@
 // INCLUDES/*{{{*/
 
 #include <map>
+#include <pthread.h>
 
 #include <libsxc/Signal/Handler.hxx>
 
