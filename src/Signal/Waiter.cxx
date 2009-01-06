@@ -97,11 +97,14 @@ namespace libsxc
 
     void Waiter::stop()/*{{{*/
     {
-      if (!_running)
-        // Allow this method without having the thread actually running.
-        return;
-
       _stopRequested = true;
+
+      if (!_running) {
+        // Allow this method without having the thread actually running. This
+        // will make the run method return immediately, as the stop is still
+        // requested.
+        return;
+      }
 
       // Send a signal to the current process that will be caught by the
       // running @ref wait thread and result in the thread to exit. Not using
@@ -120,6 +123,12 @@ namespace libsxc
 
     void Waiter::run(bool blocking)/*{{{*/
     {
+      if (_stopRequested) {
+        // A stop may have been requested even before the waiter is up and
+        // running.
+        return;
+      }
+
       if (_handlers.empty() && !sigismember(&_set, SIGINT)) {
         // We need at least one signal handler registered, or all signals set
         // to ignore, so we can send it in case we want to stop the thread.

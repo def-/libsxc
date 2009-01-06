@@ -90,7 +90,8 @@ namespace libsxc
         /**
          * Start waiting for registered signals and redirecting them to their
          * assigned handlers. This won't work if you have no @ref Handler
-         * registered.
+         * registered. Returns immediately if a stop was already requested
+         * using @ref stop.
          *
          * @param blocking Whether to block until the @ref stop method is
          *        called.
