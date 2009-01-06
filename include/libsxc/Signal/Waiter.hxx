@@ -92,14 +92,22 @@ namespace libsxc
          * Start waiting for registered signals and redirecting them to their
          * assigned handlers. This won't work if you have no @ref Handler
          * registered. Returns immediately if a stop was already requested
-         * using @ref stop.
-         *
-         * @param blocking Whether to block until the @ref stop method is
-         *        called.
+         * using @ref stop. This method does not block, using @ref join for
+         * this.
          */
-        void run(bool blocking = true);
+        void run();
 
-    /*}}}*/
+/*}}}*/
+        //void join();/*{{{*/
+
+        /**
+         * Use this method after running the waiter using @ref run if you want
+         * to block. This method will return after the thread created by @ref
+         * run returns.
+         */
+        void join();
+
+/*}}}*/
         //void stop();/*{{{*/
 
         /**

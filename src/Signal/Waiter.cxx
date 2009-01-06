@@ -55,19 +55,11 @@ namespace libsxc
       if (status)
         return;
     }/*}}}*/
-
     Waiter::~Waiter()/*{{{*/
     {
       if (_running) {
         stop();
         pthread_join(_threadId, NULL);
-      }
-
-      for (
-      Handlers::iterator handler = _handlers.begin();
-      handler != _handlers.end();
-      ++handler) {
-        delete handler->second;
       }
     }/*}}}*/
 
@@ -92,7 +84,34 @@ namespace libsxc
       if (status)
         return;
     }/*}}}*/
+    void Waiter::run()/*{{{*/
+    {
+      if (_stopRequested) {
+        // A stop may have been requested even before the waiter is up and
+        // running.
+        return;
+      }
 
+      if (_handlers.empty() && !sigismember(&_set, SIGINT)) {
+        // We need at least one signal handler registered, or all signals set
+        // to ignore, so we can send it in case we want to stop the thread.
+        // FIXME: throw appropriate exception
+        return;
+      }
+
+      int status;
+
+      status = pthread_create(&_threadId, NULL, _wait, (void *) this);
+      if (status) {
+        // FIXME: throw exception.
+        return;
+      }
+    }/*}}}*/
+    void Waiter::join()/*{{{*/
+    {
+      if (_running)
+        pthread_join(_threadId, NULL);
+    }/*}}}*/
     void Waiter::stop()/*{{{*/
     {
       _stopRequested = true;
@@ -119,34 +138,6 @@ namespace libsxc
       }
     }/*}}}*/
 
-    void Waiter::run(bool blocking)/*{{{*/
-    {
-      if (_stopRequested) {
-        // A stop may have been requested even before the waiter is up and
-        // running.
-        return;
-      }
-
-      if (_handlers.empty() && !sigismember(&_set, SIGINT)) {
-        // We need at least one signal handler registered, or all signals set
-        // to ignore, so we can send it in case we want to stop the thread.
-        // FIXME: throw appropriate exception
-        return;
-      }
-
-      int status;
-
-      status = pthread_create(&_threadId, NULL, _wait, (void *) this);
-      if (status)
-        return;
-
-      if (blocking) {
-        status = pthread_join(_threadId, NULL);
-        if (status)
-          return;
-      }
-    }/*}}}*/
-
     void *Waiter::_wait(void *rawThat)/*{{{*/
     {
       Waiter *that = reinterpret_cast<Waiter *>(rawThat);
@@ -159,7 +150,7 @@ namespace libsxc
       while (true) {
         status = sigwait(&(that->_set), &number);
         if (status)
-          return (void *) NULL;
+          break;
 
         if (that->_stopRequested) {
           // Don't call the handler as we have to exit immediately. The
@@ -167,7 +158,7 @@ namespace libsxc
           // method, but this doesn't matter, and does not have to be proven,
           // as we have to exit anyway without handling anything else (even the
           // signals already in queue).
-          return (void *) NULL;
+          break;
         }
 
         handler = that->_handlers.find(number);
