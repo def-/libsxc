@@ -17,12 +17,12 @@
  */
 /*}}}*/
 
-#ifndef LIBSXC_EXCEPTION_RUNTIMEERROR_HXX
-#define LIBSXC_EXCEPTION_RUNTIMEERROR_HXX
+#ifndef LIBSXC_EXCEPTION_OVERFLOW_HXX
+#define LIBSXC_EXCEPTION_OVERFLOW_HXX
 
 // INCLUDE/*{{{*/
 
-#include <libsxc/Exception/Exception.hxx>
+#include <libsxc/Exception/RuntimeError.hxx>
 
 #include <exception>
 
@@ -32,23 +32,24 @@ namespace libsxc
 {
   namespace Exception
   {
+    // TODO: Doc!
     /**
-     * @brief Base class for errors that could only be detected at runtime.
+     * @brief Some kind of overflow.
      */
-    class RuntimeError : virtual public Exception
+    class Overflow : virtual public RuntimeError
     {
       public:
-        // RuntimeError(const char* message) throw();/*{{{*/
+        // Overflow(const char* message) throw();/*{{{*/
 
         /**
          * @brief Default constructor.
          *
          * @param message C-string describing the error.
          */
-        RuntimeError(const char* message) throw();
+        Overflow(const char* message) throw();
 
 /*}}}*/
-        // RuntimeError(const char*, const std::exception&) throw();/*{{{*/
+        // Overflow(const char*, const std::exception&) throw();/*{{{*/
 
         /**
          * @brief Extended default constructor using a backtrace.
@@ -56,39 +57,39 @@ namespace libsxc
          * @param message C-string describing the error.
          * @param cause The cause for the throwing of this exception.
          */
-        RuntimeError(const char* message, const std::exception& cause) throw();
+        Overflow(const char* message, const std::exception& cause) throw();
 
 /*}}}*/
-        // virtual ~RuntimeError() throw()/*{{{*/
+        // virtual ~Overflow() throw()/*{{{*/
 
         /**
          * @brief Virtual destructor.
          */
-        virtual ~RuntimeError() throw();
+        virtual ~Overflow() throw();
 
 /*}}}*/
 
       protected:
-        // RuntimeError() throw();/*{{{*/
+        // Overflow() throw();/*{{{*/
 
         /**
-         * @see libsxc::RuntimeError::RuntimeError::RuntimeError()
+         * @see libsxc::Overflow::Overflow::Overflow()
          */
-        RuntimeError() throw();
+        Overflow() throw();
 
 /*}}}*/
-        // RuntimeError(const std::exception& cause) throw();/*{{{*/
+        // Overflow(const std::exception& cause) throw();/*{{{*/
 
         /**
-         * @see libsxc::RuntimeError::RuntimeError::RuntimeError(const std::exception&)
+         * @see libsxc::Overflow::Overflow::Overflow(const std::exception&)
          */
-        RuntimeError(const std::exception& cause) throw();
+        Overflow(const std::exception& cause) throw();
 
 /*}}}*/
     };
   }
 }
 
-#endif // LIBSXC_EXCEPTION_RUNTIMEERROR_HXX
+#endif // LIBSXC_EXCEPTION_OVERFLOW_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

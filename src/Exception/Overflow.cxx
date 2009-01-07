@@ -1,4 +1,4 @@
-#line 2 "libsxc:Exception/RuntimeError.cxx"
+#line 2 "libsxc:Exception/Overflow.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc
@@ -20,9 +20,9 @@
 
 // INCLUDE/*{{{*/
 
-#include <libsxc/Exception/RuntimeError.hxx>
+#include <libsxc/Exception/Overflow.hxx>
 
-#include <libsxc/Exception/Exception.hxx>
+#include <libsxc/Exception/RuntimeError.hxx>
 #include <libsxc/Exit/Code.hxx>
 
 #include <exception>
@@ -33,33 +33,33 @@ namespace libsxc
 {
   namespace Exception
   {
-    RuntimeError::RuntimeError(const char* message) throw()/*{{{*/
-    : Exception(message, Exit::General)
+    Overflow::Overflow(const char* message) throw()/*{{{*/
+    : RuntimeError(message)
     {
     }
 
 /*}}}*/
-    RuntimeError::RuntimeError(/*{{{*/
+    Overflow::Overflow(/*{{{*/
       const char* message, const std::exception& cause) throw()
-    : Exception(message, Exit::General, cause)
+    : RuntimeError(message, cause)
     {
     }
 
 /*}}}*/
-    RuntimeError::~RuntimeError() throw()/*{{{*/
+    Overflow::~Overflow() throw()/*{{{*/
     {
     }
 
 /*}}}*/
 
-    RuntimeError::RuntimeError() throw()/*{{{*/
-    : Exception()
+    Overflow::Overflow() throw()/*{{{*/
+    : RuntimeError()
     {
     }
 
 /*}}}*/
-    RuntimeError::RuntimeError(const std::exception& cause) throw()/*{{{*/
-    : Exception(cause)
+    Overflow::Overflow(const std::exception& cause) throw()/*{{{*/
+    : RuntimeError(cause)
     {
     }
 
