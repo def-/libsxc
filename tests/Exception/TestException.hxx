@@ -17,23 +17,34 @@
  */
 /*}}}*/
 
+#ifndef TESTS_EXCEPTION_TESTEXCEPTION_HXX
+#define TESTS_EXCEPTION_TESTEXCEPTION_HXX
 
 // INCLUDE/*{{{*/
 
 #include <cppunit/extensions/HelperMacros.h>
 
-#include <Option/OptionTest.hxx>
-#include <Exception/TestException.hxx>
-
 /*}}}*/
-
-// Registering all unit tests here, to make them easier to disable and enable.
 
 namespace libsxc
 {
-  CPPUNIT_TEST_SUITE_REGISTRATION(OptionTest);
-  CPPUNIT_TEST_SUITE_REGISTRATION(TestException);
+  class TestException : public CppUnit::TestFixture
+  {
+    CPPUNIT_TEST_SUITE(TestException);
+      CPPUNIT_TEST(testGetMessage);
+      CPPUNIT_TEST(testBacktrace);
+    CPPUNIT_TEST_SUITE_END();
+
+    public:
+      void setUp();
+      void tearDown();
+
+      void testGetMessage();
+      void testBacktrace();
+
+  };
 }
 
+#endif // TESTS_EXCEPTION_TESTEXCEPTION_HXX
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

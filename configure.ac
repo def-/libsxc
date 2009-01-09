@@ -266,6 +266,7 @@ AC_CONFIG_FILES([
     include/libsxc/Signal/Makefile
     tests/Makefile
     tests/Option/Makefile
+    tests/Exception/Makefile
     ${PACKAGE}.pc
 ])
 #}}}
