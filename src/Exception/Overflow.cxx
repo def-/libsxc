@@ -23,7 +23,6 @@
 #include <libsxc/Exception/Overflow.hxx>
 
 #include <libsxc/Exception/RuntimeError.hxx>
-#include <libsxc/Exit/Code.hxx>
 
 #include <exception>
 
@@ -41,7 +40,7 @@ namespace libsxc
 /*}}}*/
     Overflow::Overflow(/*{{{*/
       const char* message, const std::exception& cause) throw()
-    : RuntimeError(message, cause)
+    : RuntimeError(message)
     {
     }
 

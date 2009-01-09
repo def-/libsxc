@@ -37,7 +37,7 @@ namespace libsxc
      *
      * Derived exception classes should theoretically be preventable.
      */
-    class LogicError : virtual public Exception
+    class LogicError : public Exception
     {
       public:
         // LogicError(const char* message) throw();/*{{{*/

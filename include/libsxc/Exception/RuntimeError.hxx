@@ -35,7 +35,7 @@ namespace libsxc
     /**
      * @brief Base class for errors that could only be detected at runtime.
      */
-    class RuntimeError : virtual public Exception
+    class RuntimeError : public Exception
     {
       public:
         // RuntimeError(const char* message) throw();/*{{{*/

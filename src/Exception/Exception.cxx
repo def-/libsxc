@@ -110,6 +110,8 @@ namespace libsxc
         return;
 
       strcpy(_what, _cause);
+      if ('\0' != _what[0])    // Delimiting newline is not needed
+        strcat(_what, "\n");   // if cause is empty.
       strcat(_what, _message);
     }
 
@@ -125,6 +127,7 @@ namespace libsxc
       _message[MESSAGE_BUFFER_SIZE - 1] = '\0';
 
       // Make sure _message ends with a newline.
+      /*
       const size_t length = strlen(_message);
       if ('\n' == _message[length - 1])
         return;
@@ -138,6 +141,7 @@ namespace libsxc
         // already been truncated.
         _message[length - 1] = '\n';
       }
+      */
     }
 
 /*}}}*/
@@ -155,6 +159,7 @@ namespace libsxc
       strncpy(_cause, cause, CAUSE_BUFFER_SIZE - 1);
       _cause[CAUSE_BUFFER_SIZE - 1] = '\0';
 
+      /*
       const size_t length = strlen(_cause);
       if ('\n' == _cause[length - 1])
         return;
@@ -164,6 +169,7 @@ namespace libsxc
       } else {
         _cause[length - 1] = '\n';
       }
+      */
     }
 
 /*}}}*/

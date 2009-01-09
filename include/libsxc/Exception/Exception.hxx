@@ -48,7 +48,7 @@ namespace libsxc
     // TODO: Rename and make interface for
     // classes that can be backtraceble and can backtrace but do not "waste"
     // memory in favor of returning always the same fixed string (and type)
-    class Exception : virtual public std::exception
+    class Exception : public std::exception
     {
       public:
         // static const unsigned int WHAT_BUFFER_SIZE = 512;/*{{{*/
@@ -56,6 +56,9 @@ namespace libsxc
         /**
          * @brief Length of the cstring which will hold the cause for this
          * exception (if any) and the message that has been passed.
+         *
+         * @warning Must be one char larger than MESSAGE_BUFFER_SIZE +
+         * CAUSE_BUFFER_SIZE since they will be delimited by '\n'.
          */
         static const unsigned int WHAT_BUFFER_SIZE = 512;
 
@@ -66,10 +69,10 @@ namespace libsxc
         static const unsigned int CAUSE_BUFFER_SIZE = 384;
 
 /*}}}*/
-        // static const unsigned int MESSAGE_BUFFER_SIZE = 128;/*{{{*/
+        // static const unsigned int MESSAGE_BUFFER_SIZE = 127;/*{{{*/
 
         /// Length of the cstring which will hold the cause for this exception.
-        static const unsigned int MESSAGE_BUFFER_SIZE = 128;
+        static const unsigned int MESSAGE_BUFFER_SIZE = 127;
 
 /*}}}*/
 
