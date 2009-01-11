@@ -1,4 +1,4 @@
-#line 2 "libsxc:Debug/Logger.cxx"
+#line 2 "libsxc:Debug/Output.cxx"
 // LICENSE/*{{{*/
 /*
   libsxc
@@ -21,10 +21,9 @@
 
 // INCLUDE/*{{{*/
 
-#include <sstream>
 #include <iostream>
 
-#include <libsxc/Debug/Logger.hxx>
+#include <libsxc/Debug/Output.hxx>
 
 /*}}}*/
 
@@ -32,20 +31,10 @@ namespace libsxc
 {
   namespace Debug
   {
-    const std::string Format::format(/*{{{*/
-      const std::string file,
-      unsigned int line,
-      const std::string &raw)
-    {
-      std::ostringstream s;
-      s << file << ":" << line << ": " << raw;
-      return s.str();
-    }/*}}}*/
-
-    void Output::print(const std::string &text)/*{{{*/
+    void Output::print(const std::string &text)
     {
       std::cerr << text << std::endl;
-    }/*}}}*/
+    }
   }
 }
 

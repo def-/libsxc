@@ -22,9 +22,16 @@
 
 // INCLUDE/*{{{*/
 
+// Included for the macro.
+#include <libsxc/Debug/Format.hxx>
+#include <libsxc/Debug/Output.hxx>
 
 /*}}}*/
 
+/**
+ * This is a simple macro to be used when logging debug messages. It simplifies
+ * the use of the Logger class.
+ */
 #ifdef DEBUG
 # define LOG(text) libsxc::Debug::Logger<libsxc::Debug::Format, libsxc::Debug::Output>().log(__FILE__, __LINE__, text)
 #else
@@ -35,37 +42,15 @@ namespace libsxc
 {
   namespace Debug
   {
-    class Format
-    {
-      public:
-        virtual ~Format() {}
-      protected:
-        //const string format(file, line, &raw);/*{{{*/
-
-        /**
-         */
-        const std::string format(
-          const std::string file,
-          unsigned int line,
-          const std::string &raw);
-
-  /*}}}*/
-    };
-
-    class Output
-    {
-      public:
-        virtual ~Output() {}
-      protected:
-        //void print(const std::string &text);/*{{{*/
-
-        /**
-         */
-        void print(const std::string &text);
-
-/*}}}*/
-    };
-
+    /**
+     * This class implements a policy-based class design. This means this class
+     * does not specify how it works and is highly customizable. It derives
+     * from the specified template classes and uses their methods to format the
+     * text and to print it.
+     *
+     * @note The FormatPolicy has to implement a public or protected format method.
+     *       The OutputPolicy has to implement a public or protected print method.
+     */
     template <typename FormatPolicy, typename OutputPolicy>
     class Logger
     : public FormatPolicy
@@ -78,6 +63,12 @@ namespace libsxc
         //void log(const string file, unsigned int line, const string &text)/*{{{*/
 
         /**
+         * Format and output a text. See @ref Format and @ref Output for the
+         * corresponding implementations.
+         *
+         * @param file The name of the current file.
+         * @param line The number of the current line.
+         * @param raw The raw text to be formatted
          */
         void log(
           const std::string file,
