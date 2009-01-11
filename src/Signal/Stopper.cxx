@@ -1,6 +1,7 @@
+#line 2 "libsxc:Signal/Stopper.cxx"
 // LICENSE/*{{{*/
 /*
-  sxc - Simple Xmpp Client
+  libsxc
   Copyright (C) 2008 Dennis Felsing, Andreas Waidler
 
   Permission to use, copy, modify, and/or distribute this software for any
@@ -17,32 +18,31 @@
  */
 /*}}}*/
 
-#ifndef LIBSXC_SIGNAL_IGNORE_HXX
-#define LIBSXC_SIGNAL_IGNORE_HXX
+// INCLUDE/*{{{*/
 
-// INCLUDES/*{{{*/
-#include <libsxc/Signal/Ignorer.hxx>
+#include <libsxc/Signal/Stopper.hxx>
+
 /*}}}*/
 
 namespace libsxc
 {
   namespace Signal
   {
-    //void ignore(Waiter &sw, unsigned int signal);/*{{{*/
+    Stopper::Stopper(Waiter &waiter)/*{{{*/
+    : _waiter(waiter)
+    {
+    }/*}}}*/
 
-    /**
-     * Do nothing if the specified signal is received.
-     *
-     * @param sw The @ref Waiter to operate on.
-     * @param signal The signal to ignore.
-     */
-    void ignore(Waiter &sw, unsigned int signal);
-
-/*}}}*/
+    void Stopper::handle(unsigned int signal)/*{{{*/
+    {
+      stop();
+    }/*}}}*/
+    void Stopper::stop()/*{{{*/
+    {
+      _waiter.stop();
+    }/*}}}*/
   }
 }
-
-#endif // LIBSXC_SIGNAL_IGNORE_HXX
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

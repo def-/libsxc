@@ -17,32 +17,59 @@
  */
 /*}}}*/
 
-#ifndef LIBSXC_SIGNAL_IGNORE_HXX
-#define LIBSXC_SIGNAL_IGNORE_HXX
+#ifndef LIBSXC_SIGNAL_STOPPER_HXX
+#define LIBSXC_SIGNAL_STOPPER_HXX
 
 // INCLUDES/*{{{*/
-#include <libsxc/Signal/Ignorer.hxx>
+#include <libsxc/Signal/Handler.hxx>
+#include <libsxc/Signal/Waiter.hxx>
 /*}}}*/
 
 namespace libsxc
 {
   namespace Signal
   {
-    //void ignore(Waiter &sw, unsigned int signal);/*{{{*/
-
     /**
-     * Do nothing if the specified signal is received.
-     *
-     * @param sw The @ref Waiter to operate on.
-     * @param signal The signal to ignore.
+     * A @ref Handler that stops the @ref Waiter when receiving a signal.
      */
-    void ignore(Waiter &sw, unsigned int signal);
+    class Stopper : public Handler
+    {
+      public:
+        //Stopper(Waiter &waiter);/*{{{*/
+
+        /**
+         * Save the waiter internally so it can be used in @ref stop to stop
+         * it.
+         */
+        Stopper(Waiter &waiter);
 
 /*}}}*/
+        virtual ~Stopper() {};
+
+        //void handle(unsigned int signal) {}/*{{{*/
+
+        /**
+         * Call @ref stop when a signal comes in.
+         */
+        void handle(unsigned int signal);
+
+/*}}}*/
+      protected:
+        //void stop();/*{{{*/
+
+        /**
+         * Stop the waiter.
+         */
+        void stop();
+
+/*}}}*/
+      private:
+        Waiter &_waiter;
+    };
   }
 }
 
-#endif // LIBSXC_SIGNAL_IGNORE_HXX
+#endif // LIBSXC_SIGNAL_STOPPER_HXX
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker

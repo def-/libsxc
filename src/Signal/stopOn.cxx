@@ -28,21 +28,6 @@ namespace libsxc
 {
   namespace Signal
   {
-    Stopper::Stopper(Waiter &waiter)/*{{{*/
-    : _waiter(waiter)
-    {
-    }/*}}}*/
-
-    void Stopper::handle(unsigned int signal)/*{{{*/
-    {
-      stop();
-    }/*}}}*/
-
-    void Stopper::stop()/*{{{*/
-    {
-      _waiter.stop();
-    }/*}}}*/
-
     void stopOn(Waiter &sw, unsigned int signal)/*{{{*/
     {
       sw.reg(signal, *(new Stopper(sw)));

@@ -21,38 +21,14 @@
 #define LIBSXC_SIGNAL_STOPON_HXX
 
 // INCLUDES/*{{{*/
-#include <libsxc/Signal/Handler.hxx>
-#include <libsxc/Signal/Waiter.hxx>
+#include <libsxc/Signal/Stopper.hxx>
 /*}}}*/
 
 namespace libsxc
 {
   namespace Signal
   {
-    /**
-     * A @ref Handler that stops the @ref Waiter when receiving a signal.
-     */
-    class Stopper : public Handler
-    {
-      public:
-        Stopper(Waiter &waiter);
-        virtual ~Stopper() {};
-
-        //void handle(unsigned int signal) {}/*{{{*/
-
-        /**
-         * Stop the waiter when a signal comes in.
-         */
-        void handle(unsigned int signal);
-
-/*}}}*/
-      protected:
-        void stop();
-      private:
-        Waiter &_waiter;
-    };
-
-    //void ignore(Waiter &sw, unsigned int signal);/*{{{*/
+    //void stopOn(Waiter &sw, unsigned int signal);/*{{{*/
 
     /**
      * Register a handler to stop the waiter when the signal is received.

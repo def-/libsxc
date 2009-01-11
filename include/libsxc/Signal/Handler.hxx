@@ -25,11 +25,25 @@ namespace libsxc
 {
   namespace Signal
   {
+    /**
+     * Handle operating system signals that reach the program.
+     *
+     * @note See the @ref Waiter for how to register signal handlers.
+     */
     class Handler
     {
       public:
         virtual ~Handler() {}
+        //virtual void handle(unsigned int signal) = 0;/*{{{*/
+
+        /**
+         * Handle a signal.
+         * @param signal The signal number. See the documentation of your
+         *        operating system for information about existing signals.
+         */
         virtual void handle(unsigned int signal) = 0;
+
+/*}}}*/
     };
   }
 }

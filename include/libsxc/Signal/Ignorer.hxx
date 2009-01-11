@@ -17,32 +17,39 @@
  */
 /*}}}*/
 
-#ifndef LIBSXC_SIGNAL_IGNORE_HXX
-#define LIBSXC_SIGNAL_IGNORE_HXX
+#ifndef LIBSXC_SIGNAL_IGNORER_HXX
+#define LIBSXC_SIGNAL_IGNORER_HXX
 
 // INCLUDES/*{{{*/
-#include <libsxc/Signal/Ignorer.hxx>
+#include <libsxc/Signal/Handler.hxx>
+#include <libsxc/Signal/Waiter.hxx>
 /*}}}*/
 
 namespace libsxc
 {
   namespace Signal
   {
-    //void ignore(Waiter &sw, unsigned int signal);/*{{{*/
-
     /**
-     * Do nothing if the specified signal is received.
-     *
-     * @param sw The @ref Waiter to operate on.
-     * @param signal The signal to ignore.
+     * A very simple @ref Handler that just ignores every incoming signal.
      */
-    void ignore(Waiter &sw, unsigned int signal);
+    class Ignorer : public Handler
+    {
+      public:
+        virtual ~Ignorer() {}
+
+        //void handle(unsigned int signal) {}/*{{{*/
+
+        /**
+         * Do nothing when a signal comes in
+         */
+        void handle(unsigned int signal) {}
 
 /*}}}*/
+    };
   }
 }
 
-#endif // LIBSXC_SIGNAL_IGNORE_HXX
+#endif // LIBSXC_SIGNAL_IGNORER_HXX
 
 // Use no tabs at all; two spaces indentation; max. eighty chars per line.
 // vim: et ts=2 sw=2 sts=2 tw=80 fdm=marker
