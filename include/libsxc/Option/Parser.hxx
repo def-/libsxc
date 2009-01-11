@@ -46,8 +46,22 @@ namespace libsxc
       public:
         Parser();
 
+        //bool doShowHelp();/*{{{*/
+
+        /**
+         * Return whether to show the help.
+         */
         bool doShowHelp();
+
+/*}}}*/
+        //bool doShowVersion();/*{{{*/
+
+        /**
+         * Return whether to show the version.
+         */
         bool doShowVersion();
+
+/*}}}*/
         //void addOption(OptionBase *option);/*{{{*/
 
         /**
