@@ -22,6 +22,8 @@
 
 // INCLUDE/*{{{*/
 
+#include <string>
+
 // Included for the macro.
 #include <libsxc/Debug/Format.hxx>
 #include <libsxc/Debug/Output.hxx>

@@ -18,10 +18,13 @@
  */
 /*}}}*/
 
-
 // INCLUDE/*{{{*/
 
+#include <time.h>
+#include <sys/time.h>
+
 #include <sstream>
+#include <iomanip>
 
 #include <libsxc/Debug/Format.hxx>
 
@@ -36,8 +39,13 @@ namespace libsxc
       unsigned int line,
       const std::string &raw)
     {
+      struct timeval tv;
+      struct timezone tz;
+      gettimeofday(&tv, &tz);
+
       std::ostringstream s;
-      s << file << ":" << line << ": " << raw;
+      s << "[" << tv.tv_sec << "." << std::setfill('0') << std::setw(6) 
+        << tv.tv_usec << "] " << file << ":" << line << ": " << raw;
       return s.str();
     }
   }
