@@ -165,7 +165,7 @@ namespace libsxc
       break;
       }
       if (!streamErrorText.empty())
-        text += " (Addition information: " + streamErrorText + ")";
+        text += " (Additional information: " + streamErrorText + ")";
     }
     case gloox::ConnStreamVersionError:
       text = "The incoming stream's version is not supported.";
@@ -270,8 +270,7 @@ namespace libsxc
       break;
     case gloox::ConnUserDisconnected:
       if (isDebug)
-        text = "The user (or higher-level protocol) requested a "
-             "disconnect.";
+        text = "The user requested a disconnect.";
       break;
     case gloox::ConnNotConnected:
       text = "There is no active connection.";
