@@ -196,7 +196,7 @@ namespace libsxc
       //text = "The incoming stream's version is not supported.";
       break;
     case gloox::ConnStreamClosed:
-      text = "Stream closed by server.";
+      text = "Server closed stream.";
       //text = "The stream has been closed by the server.";
       break;
     case gloox::ConnProxyAuthRequired:
