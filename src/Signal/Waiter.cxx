@@ -25,6 +25,8 @@
 #include <pthread.h>
 #include <signal.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include <libsxc/Signal/Waiter.hxx>
 
