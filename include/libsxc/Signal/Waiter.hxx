@@ -24,6 +24,7 @@
 
 #include <map>
 #include <pthread.h>
+#include <signal.h>
 
 #include <libsxc/Signal/Handler.hxx>
 
